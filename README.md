@@ -1,2 +1,2 @@
 # MySQL学习笔记
-&nbsp;&nbsp;
+&nbsp;&nbsp;打好基本功
