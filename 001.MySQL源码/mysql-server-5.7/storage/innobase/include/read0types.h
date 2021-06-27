@@ -42,8 +42,14 @@ Created 2/16/1997 Heikki Tuuri
 // Friend declaration
 class MVCC;
 
-/** Read view lists the trx ids of those transactions for which a consistent
-read should not see the modifications to the database. */
+/**
+ * 
+ * 
+ *  Read view lists the trx ids of those transactions for which a consistent
+read should not see the modifications to the database. 
+* 读视图列出了那些事务的trx id，对于这些事务，一致的读操作不应该看到对数据库的修改。
+*
+*/
 
 class ReadView {
 	/** This is similar to a std::vector but it is not a drop
@@ -313,17 +319,24 @@ private:
 	low water mark". */
 	trx_id_t	m_up_limit_id;
 
-	/** trx id of creating transaction, set to TRX_ID_MAX for free
-	views. */
+	/** 
+	 * trx id of creating transaction, set to TRX_ID_MAX for free views.
+	 * 创建该ReadView的事务的事务ID
+	 **/
 	trx_id_t	m_creator_trx_id;
 
-	/** Set of RW transactions that was active when this snapshot
-	was taken */
+	/** 
+	 * 
+	 * Set of RW transactions that was active when this snapshot was taken
+	 * 在此快照被捕获时处于活动状态的RW事务集,所谓活动的，即未提交的
+	 **/
 	ids_t		m_ids;
 
 	/** The view does not need to see the undo logs for transactions
 	whose transaction number is strictly smaller (<) than this value:
-	they can be removed in purge if not needed by other views */
+	they can be removed in purge if not needed by other views 
+	* 
+	*/
 	trx_id_t	m_low_limit_no;
 
 	/** AC-NL-RO transaction view that has been "closed". */
