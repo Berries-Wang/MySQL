@@ -42,14 +42,13 @@ Created 2/16/1997 Heikki Tuuri
 // Friend declaration
 class MVCC;
 
-/**
- * 
- * 
+/** 
  *  Read view lists the trx ids of those transactions for which a consistent
-read should not see the modifications to the database. 
-* 读视图列出了那些事务的trx id，对于这些事务，一致的读操作不应该看到对数据库的修改。
-*
-*/
+ * read should not see the modifications to the database. 
+ * 
+ * 读视图列出了那些事务的trx id，对于这些事务，一致的读操作不应该看到对数据库的修改。
+ *
+ */
 
 class ReadView {
 	/** This is similar to a std::vector but it is not a drop
@@ -168,10 +167,10 @@ public:
 		trx_id_t		id,
 		const table_name_t&	name);
 
-	/** Check whether the changes by id are visible.
-	@param[in]	id	transaction id to check against the view
+	/** Check whether the changes by id are visible.(检查事务的更改是否可见)
+	@param[in]	id	transaction id to check against the view.(要对视图进行检查的事务ID)
 	@param[in]	name	table name
-	@return whether the view sees the modifications of id. */
+	@return whether the view sees the modifications of id. (视图是否能够看到ID的修改)*/
 	bool changes_visible(
 		trx_id_t		id,
 		const table_name_t&	name) const
@@ -197,6 +196,7 @@ public:
 
 		const ids_t::value_type*	p = m_ids.data();
 
+        //> 判断事务ID “id” 是否在活跃的事务列表中
 		return(!std::binary_search(p, p + m_ids.size(), id));
 	}
 
@@ -311,24 +311,30 @@ private:
 
 private:
 	/** The read should not see any transaction with trx id >= this
-	value. In other words, this is the "high water mark". */
+	  * value. In other words, this is the "high water mark". 
+	  * 
+	  * >>> 事务ID大于该值的对于当前读不可见
+	*/
 	trx_id_t	m_low_limit_id;
 
 	/** The read should see all trx ids which are strictly
-	smaller (<) than this value.  In other words, this is the
-	low water mark". */
+	  * smaller (<) than this value.  In other words, this is the
+	  * low water mark". 
+	  * 
+	  * >>> 事务ID小于该值的对于当前读不可见
+	  * */
 	trx_id_t	m_up_limit_id;
 
 	/** 
 	 * trx id of creating transaction, set to TRX_ID_MAX for free views.
-	 * 创建该ReadView的事务的事务ID
+	 * >>> 创建该ReadView的事务的事务ID
 	 **/
 	trx_id_t	m_creator_trx_id;
 
 	/** 
 	 * 
 	 * Set of RW transactions that was active when this snapshot was taken
-	 * 在此快照被捕获时处于活动状态的RW事务集,所谓活动的，即未提交的
+	 * >>> 在此快照被捕获时处于活动状态的RW事务集,所谓活动的，即未提交的
 	 **/
 	ids_t		m_ids;
 

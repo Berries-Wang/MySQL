@@ -497,7 +497,7 @@ lock_clust_rec_cons_read_sees(
 				passed over by a read cursor */
 	dict_index_t*	index,	/*!< in: clustered index */
 	const ulint*	offsets,/*!< in: rec_get_offsets(rec, index) */
-	ReadView*	view);	/*!< in: consistent read view */
+	ReadView*	view);	/*!< in: consistent read view 一致性读视图*/
 /*********************************************************************//**
 Checks that a non-clustered index record is seen in a consistent read.
 
