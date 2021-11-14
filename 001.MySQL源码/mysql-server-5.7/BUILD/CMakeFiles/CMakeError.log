@@ -1,0 +1,1977 @@
+Performing C SOURCE FILE Test HAVE_C_SHIFT_OR_OPTIMIZATION_BUG failed with the following compile output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9420e/fast && /usr/bin/make -f CMakeFiles/cmTC_9420e.dir/build.make CMakeFiles/cmTC_9420e.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_9420e.dir/src.c.o
+/usr/bin/cc   -DHAVE_C_SHIFT_OR_OPTIMIZATION_BUG  -O3 -fexpensive-optimizations   -o CMakeFiles/cmTC_9420e.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_9420e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9420e.dir/link.txt --verbose=1
+/usr/bin/cc  -DHAVE_C_SHIFT_OR_OPTIMIZATION_BUG  -O3 -fexpensive-optimizations    -rdynamic CMakeFiles/cmTC_9420e.dir/src.c.o  -o cmTC_9420e 
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+
+  struct X
+  {
+    int i;
+    unsigned short s;
+  };
+
+  unsigned __attribute__((noinline)) f(struct X x)
+  {
+    return x.s | (x.i << 16);
+  }
+
+  int
+  main()
+  {
+    struct X x;
+    x.i = 0x00001234;
+    x.s = 0x5678;
+    unsigned y = f(x);
+    /* Succeed (return 0) if compiler have bug */
+    return y == 0x12345678 ? 1 : 0;
+  }
+
+Performing C++ SOURCE FILE Test HAVE_CXX_SHIFT_OR_OPTIMIZATION_BUG failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1d861/fast && /usr/bin/make -f CMakeFiles/cmTC_1d861.dir/build.make CMakeFiles/cmTC_1d861.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_1d861.dir/src.cxx.o
+/usr/bin/c++    -DHAVE_CXX_SHIFT_OR_OPTIMIZATION_BUG  -O3 -fexpensive-optimizations   -o CMakeFiles/cmTC_1d861.dir/src.cxx.o -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_1d861
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1d861.dir/link.txt --verbose=1
+/usr/bin/c++   -DHAVE_CXX_SHIFT_OR_OPTIMIZATION_BUG  -O3 -fexpensive-optimizations    -rdynamic CMakeFiles/cmTC_1d861.dir/src.cxx.o  -o cmTC_1d861 
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+
+  struct X
+  {
+    int i;
+    unsigned short s;
+  };
+
+  unsigned __attribute__((noinline)) f(struct X x)
+  {
+    return x.s | (x.i << 16);
+  }
+
+  int
+  main()
+  {
+    struct X x;
+    x.i = 0x00001234;
+    x.s = 0x5678;
+    unsigned y = f(x);
+    /* Succeed (return 0) if compiler have bug */
+    return y == 0x12345678 ? 1 : 0;
+  }
+
+Performing C SOURCE FILE Test HAVE_C_FLOATING_POINT_FUSED_MADD failed with the following compile output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_09df2/fast && /usr/bin/make -f CMakeFiles/cmTC_09df2.dir/build.make CMakeFiles/cmTC_09df2.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_09df2.dir/src.c.o
+/usr/bin/cc   -DHAVE_C_FLOATING_POINT_FUSED_MADD  -O3   -o CMakeFiles/cmTC_09df2.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_09df2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_09df2.dir/link.txt --verbose=1
+/usr/bin/cc  -DHAVE_C_FLOATING_POINT_FUSED_MADD  -O3    -rdynamic CMakeFiles/cmTC_09df2.dir/src.c.o  -o cmTC_09df2 
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+
+  int main (int argc, char **argv)
+  {
+    double n[21] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                     0, 0, 0, 1, 1, 1, 1, 1, 1, 1,1 };
+    double m= 0, s= 0;
+    int i;
+    for(i= 0; i < 21; i++)
+    {
+      double m_kminusone= m;
+      m= m_kminusone + (n[i] - m_kminusone) / (double) (i + 2);
+      s= s + (n[i] - m_kminusone) * (n[i] - m);
+    }
+    /*
+      s should now be either 5e 74 d1 45 17 5d 14 40 or
+      40 14 5d 17 45 d1 74 5e, depending on endianness. If the floating point
+      operations are optimized with fused multiply-add instructions, the least
+      significant byte is 5d instead of 5e.
+    */
+    return (*(unsigned char*)(&s) == 0x5e ||
+            *((unsigned char*)(&s) + 7) == 0x5e);
+  }
+Performing C++ SOURCE FILE Test HAVE_CXX_FLOATING_POINT_FUSED_MADD failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d1337/fast && /usr/bin/make -f CMakeFiles/cmTC_d1337.dir/build.make CMakeFiles/cmTC_d1337.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_d1337.dir/src.cxx.o
+/usr/bin/c++    -DHAVE_CXX_FLOATING_POINT_FUSED_MADD  -O3   -o CMakeFiles/cmTC_d1337.dir/src.cxx.o -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_d1337
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d1337.dir/link.txt --verbose=1
+/usr/bin/c++   -DHAVE_CXX_FLOATING_POINT_FUSED_MADD  -O3    -rdynamic CMakeFiles/cmTC_d1337.dir/src.cxx.o  -o cmTC_d1337 
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+
+  int main (int argc, char **argv)
+  {
+    double n[21] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                     0, 0, 0, 1, 1, 1, 1, 1, 1, 1,1 };
+    double m= 0, s= 0;
+    int i;
+    for(i= 0; i < 21; i++)
+    {
+      double m_kminusone= m;
+      m= m_kminusone + (n[i] - m_kminusone) / (double) (i + 2);
+      s= s + (n[i] - m_kminusone) * (n[i] - m);
+    }
+    /*
+      s should now be either 5e 74 d1 45 17 5d 14 40 or
+      40 14 5d 17 45 d1 74 5e, depending on endianness. If the floating point
+      operations are optimized with fused multiply-add instructions, the least
+      significant byte is 5d instead of 5e.
+    */
+    return (*(unsigned char*)(&s) == 0x5e ||
+            *((unsigned char*)(&s) + 7) == 0x5e);
+  }
+Performing C++ SOURCE FILE Test HAVE_LLVM_LIBCPP failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9375d/fast && /usr/bin/make -f CMakeFiles/cmTC_9375d.dir/build.make CMakeFiles/cmTC_9375d.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_9375d.dir/src.cxx.o
+/usr/bin/c++    -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_LLVM_LIBCPP   -o CMakeFiles/cmTC_9375d.dir/src.cxx.o -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_9375d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9375d.dir/link.txt --verbose=1
+/usr/bin/c++  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_LLVM_LIBCPP    -rdynamic CMakeFiles/cmTC_9375d.dir/src.cxx.o  -o cmTC_9375d 
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+
+#include <ciso646>
+int main()
+{
+#ifdef _LIBCPP_VERSION
+  return 0;
+#else
+  return 1;
+#endif
+}
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_dc281/fast && /usr/bin/make -f CMakeFiles/cmTC_dc281.dir/build.make CMakeFiles/cmTC_dc281.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_dc281.dir/src.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_dc281.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_dc281
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dc281.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_dc281.dir/src.c.o  -o cmTC_dc281 
+/usr/bin/ld: CMakeFiles/cmTC_dc281.dir/src.c.o: in function `main':
+src.c:(.text+0x2f): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x3b): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x4c): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_dc281.dir/build.make:87：cmTC_dc281] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_dc281/fast] 错误 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_95acf/fast && /usr/bin/make -f CMakeFiles/cmTC_95acf.dir/build.make CMakeFiles/cmTC_95acf.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_95acf.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_95acf.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_95acf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_95acf.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_95acf.dir/CheckFunctionExists.c.o  -o cmTC_95acf  -lpthreads 
+/usr/bin/ld: 找不到 -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_95acf.dir/build.make:87：cmTC_95acf] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_95acf/fast] 错误 2
+
+
+
+Determining if the function floor exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_67472/fast && /usr/bin/make -f CMakeFiles/cmTC_67472.dir/build.make CMakeFiles/cmTC_67472.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_67472.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=floor   -o CMakeFiles/cmTC_67472.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+/usr/share/cmake-3.16/Modules/CheckFunctionExists.c:7:3: warning: conflicting types for built-in function ‘floor’ [enabled by default]
+Linking C executable cmTC_67472
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_67472.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=floor    -rdynamic CMakeFiles/cmTC_67472.dir/CheckFunctionExists.c.o  -o cmTC_67472 
+/usr/bin/ld: CMakeFiles/cmTC_67472.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `floor'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_67472.dir/build.make:87：cmTC_67472] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_67472/fast] 错误 2
+
+
+
+Determining if the function crypt exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_60f3e/fast && /usr/bin/make -f CMakeFiles/cmTC_60f3e.dir/build.make CMakeFiles/cmTC_60f3e.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_60f3e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=crypt   -o CMakeFiles/cmTC_60f3e.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_60f3e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_60f3e.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=crypt    -rdynamic CMakeFiles/cmTC_60f3e.dir/CheckFunctionExists.c.o  -o cmTC_60f3e 
+/usr/bin/ld: CMakeFiles/cmTC_60f3e.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `crypt'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_60f3e.dir/build.make:87：cmTC_60f3e] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_60f3e/fast] 错误 2
+
+
+
+Determining if the function dlopen exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a4135/fast && /usr/bin/make -f CMakeFiles/cmTC_a4135.dir/build.make CMakeFiles/cmTC_a4135.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_a4135.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=dlopen   -o CMakeFiles/cmTC_a4135.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a4135
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a4135.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=dlopen    -rdynamic CMakeFiles/cmTC_a4135.dir/CheckFunctionExists.c.o  -o cmTC_a4135 
+/usr/bin/ld: CMakeFiles/cmTC_a4135.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `dlopen'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_a4135.dir/build.make:87：cmTC_a4135] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_a4135/fast] 错误 2
+
+
+
+Determining if the function timer_create exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b39f0/fast && /usr/bin/make -f CMakeFiles/cmTC_b39f0.dir/build.make CMakeFiles/cmTC_b39f0.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_b39f0.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=timer_create   -o CMakeFiles/cmTC_b39f0.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_b39f0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b39f0.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=timer_create    -rdynamic CMakeFiles/cmTC_b39f0.dir/CheckFunctionExists.c.o  -o cmTC_b39f0 
+/usr/bin/ld: CMakeFiles/cmTC_b39f0.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `timer_create'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_b39f0.dir/build.make:87：cmTC_b39f0] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_b39f0/fast] 错误 2
+
+
+
+Determining if the function atomic_thread_fence exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_dbfb4/fast && /usr/bin/make -f CMakeFiles/cmTC_dbfb4.dir/build.make CMakeFiles/cmTC_dbfb4.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_dbfb4.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=atomic_thread_fence   -o CMakeFiles/cmTC_dbfb4.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_dbfb4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dbfb4.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=atomic_thread_fence    -rdynamic CMakeFiles/cmTC_dbfb4.dir/CheckFunctionExists.c.o  -o cmTC_dbfb4 
+/usr/bin/ld: CMakeFiles/cmTC_dbfb4.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `atomic_thread_fence'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_dbfb4.dir/build.make:87：cmTC_dbfb4] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_dbfb4/fast] 错误 2
+
+
+
+Determining if the function atomic_thread_fence exists in the atomic failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_79bc0/fast && /usr/bin/make -f CMakeFiles/cmTC_79bc0.dir/build.make CMakeFiles/cmTC_79bc0.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_79bc0.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=atomic_thread_fence   -o CMakeFiles/cmTC_79bc0.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_79bc0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_79bc0.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=atomic_thread_fence    -rdynamic CMakeFiles/cmTC_79bc0.dir/CheckFunctionExists.c.o  -o cmTC_79bc0  -latomic 
+/usr/bin/ld: 找不到 -latomic
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_79bc0.dir/build.make:87：cmTC_79bc0] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_79bc0/fast] 错误 2
+
+
+
+Determining if files ieeefp.h exist failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_307e5/fast && /usr/bin/make -f CMakeFiles/cmTC_307e5.dir/build.make CMakeFiles/cmTC_307e5.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_307e5.dir/HAVE_IEEEFP_H.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_307e5.dir/HAVE_IEEEFP_H.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_IEEEFP_H.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_IEEEFP_H.c:2:20: fatal error: ieeefp.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_307e5.dir/build.make:66：CMakeFiles/cmTC_307e5.dir/HAVE_IEEEFP_H.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_307e5/fast] 错误 2
+
+
+Source:
+/* */
+#include <ieeefp.h>
+
+
+int main(void){return 0;}
+
+Determining if files sys/devpoll.h exist failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_fedd5/fast && /usr/bin/make -f CMakeFiles/cmTC_fedd5.dir/build.make CMakeFiles/cmTC_fedd5.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_fedd5.dir/HAVE_DEVPOLL.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_fedd5.dir/HAVE_DEVPOLL.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_DEVPOLL.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_DEVPOLL.c:2:25: fatal error: sys/devpoll.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_fedd5.dir/build.make:66：CMakeFiles/cmTC_fedd5.dir/HAVE_DEVPOLL.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_fedd5/fast] 错误 2
+
+
+Source:
+/* */
+#include <sys/devpoll.h>
+
+
+int main(void){return 0;}
+
+Determining if the function _aligned_malloc exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_28dc5/fast && /usr/bin/make -f CMakeFiles/cmTC_28dc5.dir/build.make CMakeFiles/cmTC_28dc5.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_28dc5.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=_aligned_malloc   -o CMakeFiles/cmTC_28dc5.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_28dc5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_28dc5.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=_aligned_malloc    -rdynamic CMakeFiles/cmTC_28dc5.dir/CheckFunctionExists.c.o  -o cmTC_28dc5  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_28dc5.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `_aligned_malloc'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_28dc5.dir/build.make:87：cmTC_28dc5] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_28dc5/fast] 错误 2
+
+
+
+Determining if the function printstack exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4aa9c/fast && /usr/bin/make -f CMakeFiles/cmTC_4aa9c.dir/build.make CMakeFiles/cmTC_4aa9c.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_4aa9c.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=printstack   -o CMakeFiles/cmTC_4aa9c.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4aa9c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4aa9c.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=printstack    -rdynamic CMakeFiles/cmTC_4aa9c.dir/CheckFunctionExists.c.o  -o cmTC_4aa9c  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_4aa9c.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `printstack'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_4aa9c.dir/build.make:87：cmTC_4aa9c] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_4aa9c/fast] 错误 2
+
+
+
+Determining if the function directio exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_caa79/fast && /usr/bin/make -f CMakeFiles/cmTC_caa79.dir/build.make CMakeFiles/cmTC_caa79.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_caa79.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=directio   -o CMakeFiles/cmTC_caa79.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_caa79
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_caa79.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=directio    -rdynamic CMakeFiles/cmTC_caa79.dir/CheckFunctionExists.c.o  -o cmTC_caa79  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_caa79.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `directio'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_caa79.dir/build.make:87：cmTC_caa79] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_caa79/fast] 错误 2
+
+
+
+Determining if the function compress exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a5967/fast && /usr/bin/make -f CMakeFiles/cmTC_a5967.dir/build.make CMakeFiles/cmTC_a5967.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_a5967.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=compress   -o CMakeFiles/cmTC_a5967.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a5967
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a5967.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=compress    -rdynamic CMakeFiles/cmTC_a5967.dir/CheckFunctionExists.c.o  -o cmTC_a5967  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_a5967.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `compress'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_a5967.dir/build.make:87：cmTC_a5967] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_a5967/fast] 错误 2
+
+
+
+Determining if the function gethrtime exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3a23f/fast && /usr/bin/make -f CMakeFiles/cmTC_3a23f.dir/build.make CMakeFiles/cmTC_3a23f.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_3a23f.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=gethrtime   -o CMakeFiles/cmTC_3a23f.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_3a23f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3a23f.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=gethrtime    -rdynamic CMakeFiles/cmTC_3a23f.dir/CheckFunctionExists.c.o  -o cmTC_3a23f  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_3a23f.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `gethrtime'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_3a23f.dir/build.make:87：cmTC_3a23f] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_3a23f/fast] 错误 2
+
+
+
+Determining if the function getpassphrase exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2f46a/fast && /usr/bin/make -f CMakeFiles/cmTC_2f46a.dir/build.make CMakeFiles/cmTC_2f46a.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_2f46a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=getpassphrase   -o CMakeFiles/cmTC_2f46a.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2f46a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2f46a.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=getpassphrase    -rdynamic CMakeFiles/cmTC_2f46a.dir/CheckFunctionExists.c.o  -o cmTC_2f46a  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_2f46a.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `getpassphrase'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_2f46a.dir/build.make:87：cmTC_2f46a] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_2f46a/fast] 错误 2
+
+
+
+Determining if the function issetugid exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_3c045/fast && /usr/bin/make -f CMakeFiles/cmTC_3c045.dir/build.make CMakeFiles/cmTC_3c045.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_3c045.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=issetugid   -o CMakeFiles/cmTC_3c045.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_3c045
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3c045.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=issetugid    -rdynamic CMakeFiles/cmTC_3c045.dir/CheckFunctionExists.c.o  -o cmTC_3c045  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_3c045.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `issetugid'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_3c045.dir/build.make:87：cmTC_3c045] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_3c045/fast] 错误 2
+
+
+
+Determining if the function setfd exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4de36/fast && /usr/bin/make -f CMakeFiles/cmTC_4de36.dir/build.make CMakeFiles/cmTC_4de36.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_4de36.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=setfd   -o CMakeFiles/cmTC_4de36.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4de36
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4de36.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=setfd    -rdynamic CMakeFiles/cmTC_4de36.dir/CheckFunctionExists.c.o  -o cmTC_4de36  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_4de36.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `setfd'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_4de36.dir/build.make:87：cmTC_4de36] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_4de36/fast] 错误 2
+
+
+
+Determining if the function strlcpy exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c245d/fast && /usr/bin/make -f CMakeFiles/cmTC_c245d.dir/build.make CMakeFiles/cmTC_c245d.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_c245d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=strlcpy   -o CMakeFiles/cmTC_c245d.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_c245d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c245d.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=strlcpy    -rdynamic CMakeFiles/cmTC_c245d.dir/CheckFunctionExists.c.o  -o cmTC_c245d  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_c245d.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `strlcpy'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_c245d.dir/build.make:87：cmTC_c245d] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_c245d/fast] 错误 2
+
+
+
+Determining if the function strlcat exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d09a5/fast && /usr/bin/make -f CMakeFiles/cmTC_d09a5.dir/build.make CMakeFiles/cmTC_d09a5.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_d09a5.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=strlcat   -o CMakeFiles/cmTC_d09a5.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d09a5
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d09a5.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=strlcat    -rdynamic CMakeFiles/cmTC_d09a5.dir/CheckFunctionExists.c.o  -o cmTC_d09a5  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_d09a5.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `strlcat'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_d09a5.dir/build.make:87：cmTC_d09a5] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_d09a5/fast] 错误 2
+
+
+
+Determining if the function fgetln exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f76d3/fast && /usr/bin/make -f CMakeFiles/cmTC_f76d3.dir/build.make CMakeFiles/cmTC_f76d3.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_f76d3.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=fgetln   -o CMakeFiles/cmTC_f76d3.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f76d3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f76d3.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=fgetln    -rdynamic CMakeFiles/cmTC_f76d3.dir/CheckFunctionExists.c.o  -o cmTC_f76d3  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_f76d3.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `fgetln'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_f76d3.dir/build.make:87：cmTC_f76d3] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_f76d3/fast] 错误 2
+
+
+
+Determining if the function tell exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bec37/fast && /usr/bin/make -f CMakeFiles/cmTC_bec37.dir/build.make CMakeFiles/cmTC_bec37.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_bec37.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=tell   -o CMakeFiles/cmTC_bec37.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bec37
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bec37.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=tell    -rdynamic CMakeFiles/cmTC_bec37.dir/CheckFunctionExists.c.o  -o cmTC_bec37  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_bec37.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `tell'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_bec37.dir/build.make:87：cmTC_bec37] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_bec37/fast] 错误 2
+
+
+
+Determining if the function ntohll exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a15fd/fast && /usr/bin/make -f CMakeFiles/cmTC_a15fd.dir/build.make CMakeFiles/cmTC_a15fd.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_a15fd.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=ntohll   -o CMakeFiles/cmTC_a15fd.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_a15fd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a15fd.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=ntohll    -rdynamic CMakeFiles/cmTC_a15fd.dir/CheckFunctionExists.c.o  -o cmTC_a15fd  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_a15fd.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `ntohll'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_a15fd.dir/build.make:87：cmTC_a15fd] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_a15fd/fast] 错误 2
+
+
+
+Determining if the function kqueue exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b838a/fast && /usr/bin/make -f CMakeFiles/cmTC_b838a.dir/build.make CMakeFiles/cmTC_b838a.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_b838a.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=kqueue   -o CMakeFiles/cmTC_b838a.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_b838a
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b838a.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=kqueue    -rdynamic CMakeFiles/cmTC_b838a.dir/CheckFunctionExists.c.o  -o cmTC_b838a  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_b838a.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `kqueue'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_b838a.dir/build.make:87：cmTC_b838a] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_b838a/fast] 错误 2
+
+
+
+Determining if the FIONREAD exist failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0bdb3/fast && /usr/bin/make -f CMakeFiles/cmTC_0bdb3.dir/build.make CMakeFiles/cmTC_0bdb3.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_0bdb3.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_0bdb3.dir/CheckSymbolExists.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:23: fatal error: sys/filio.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_0bdb3.dir/build.make:66：CMakeFiles/cmTC_0bdb3.dir/CheckSymbolExists.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_0bdb3/fast] 错误 2
+
+
+File /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/filio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef FIONREAD
+  return ((int*)(&FIONREAD))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the SIGEV_PORT exist failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_63d34/fast && /usr/bin/make -f CMakeFiles/cmTC_63d34.dir/build.make CMakeFiles/cmTC_63d34.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_63d34.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_63d34.dir/CheckSymbolExists.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c:4:25: fatal error: sys/siginfo.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_63d34.dir/build.make:66：CMakeFiles/cmTC_63d34.dir/CheckSymbolExists.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_63d34/fast] 错误 2
+
+
+File /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <signal.h>
+#include <time.h>
+#include <sys/siginfo.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef SIGEV_PORT
+  return ((int*)(&SIGEV_PORT))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the function kqueue exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7f48e/fast && /usr/bin/make -f CMakeFiles/cmTC_7f48e.dir/build.make CMakeFiles/cmTC_7f48e.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_7f48e.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=kqueue   -o CMakeFiles/cmTC_7f48e.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_7f48e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7f48e.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=kqueue    -rdynamic CMakeFiles/cmTC_7f48e.dir/CheckFunctionExists.c.o  -o cmTC_7f48e  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_7f48e.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `kqueue'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_7f48e.dir/build.make:87：cmTC_7f48e] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_7f48e/fast] 错误 2
+
+
+
+Determining if the EVFILT_TIMER exist failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_26800/fast && /usr/bin/make -f CMakeFiles/cmTC_26800.dir/build.make CMakeFiles/cmTC_26800.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_26800.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_26800.dir/CheckSymbolExists.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c:3:23: fatal error: sys/event.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_26800.dir/build.make:66：CMakeFiles/cmTC_26800.dir/CheckSymbolExists.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_26800/fast] 错误 2
+
+
+File /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+#include <sys/event.h>
+#include <sys/time.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef EVFILT_TIMER
+  return ((int*)(&EVFILT_TIMER))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the include file netinet/in6.h exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_4fc16/fast && /usr/bin/make -f CMakeFiles/cmTC_4fc16.dir/build.make CMakeFiles/cmTC_4fc16.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_4fc16.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_4fc16.dir/CheckIncludeFile.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:25: fatal error: netinet/in6.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_4fc16.dir/build.make:66：CMakeFiles/cmTC_4fc16.dir/CheckIncludeFile.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_4fc16/fast] 错误 2
+
+
+
+Performing C SOURCE FILE Test HAVE_SOCKADDR_IN_SIN_LEN failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_505f6/fast && /usr/bin/make -f CMakeFiles/cmTC_505f6.dir/build.make CMakeFiles/cmTC_505f6.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_505f6.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_SOCKADDR_IN_SIN_LEN   -o CMakeFiles/cmTC_505f6.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:8:41: error: ‘struct sockaddr_in’ has no member named ‘sin_len’
+make[1]: *** [CMakeFiles/cmTC_505f6.dir/build.make:66：CMakeFiles/cmTC_505f6.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_505f6/fast] 错误 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+
+int main()
+{
+  (void)sizeof(((struct sockaddr_in *)0)->sin_len);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_SOCKADDR_IN6_SIN6_LEN failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_427bf/fast && /usr/bin/make -f CMakeFiles/cmTC_427bf.dir/build.make CMakeFiles/cmTC_427bf.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_427bf.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_SOCKADDR_IN6_SIN6_LEN   -o CMakeFiles/cmTC_427bf.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:8:42: error: ‘struct sockaddr_in6’ has no member named ‘sin6_len’
+make[1]: *** [CMakeFiles/cmTC_427bf.dir/build.make:66：CMakeFiles/cmTC_427bf.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_427bf/fast] 错误 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <sys/socket.h>
+
+int main()
+{
+  (void)sizeof(((struct sockaddr_in6 *)0)->sin6_len);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_PTHREAD_THREADID_NP failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_186c4/fast && /usr/bin/make -f CMakeFiles/cmTC_186c4.dir/build.make CMakeFiles/cmTC_186c4.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_186c4.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_PTHREAD_THREADID_NP   -o CMakeFiles/cmTC_186c4.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_186c4
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_186c4.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_PTHREAD_THREADID_NP    -rdynamic CMakeFiles/cmTC_186c4.dir/src.c.o  -o cmTC_186c4  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_186c4.dir/src.c.o: in function `main':
+src.c:(.text+0x21): undefined reference to `pthread_threadid_np'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_186c4.dir/build.make:87：cmTC_186c4] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_186c4/fast] 错误 2
+
+
+Source file was:
+
+#include <pthread.h>
+int main(int ac, char **av)
+{
+  unsigned long long tid64;
+  pthread_threadid_np(NULL, &tid64);
+  return (tid64 != 0 ? 0 : 1);
+}
+Performing C++ SOURCE FILE Test HAVE_IMPLICIT_DEPENDENT_NAME_TYPING failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a4cd3/fast && /usr/bin/make -f CMakeFiles/cmTC_a4cd3.dir/build.make CMakeFiles/cmTC_a4cd3.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_a4cd3.dir/src.cxx.o
+/usr/bin/c++  -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_IMPLICIT_DEPENDENT_NAME_TYPING   -o CMakeFiles/cmTC_a4cd3.dir/src.cxx.o -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx: In member function ‘void ct2<T>::func()’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx:15:5: error: need ‘typename’ before ‘std::vector<T>::iterator’ because ‘std::vector<T>’ is a dependent scope
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx:15:30: error: expected ‘;’ before ‘itr’
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx: In instantiation of ‘void ct2<T>::func() [with T = double]’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx:21:13:   required from here
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx:15:5: error: dependent-name ‘std::vector<T>::iterator’ is parsed as a non-type, but instantiation yields a type
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx:15:5: note: say ‘typename std::vector<T>::iterator’ if a type is meant
+make[1]: *** [CMakeFiles/cmTC_a4cd3.dir/build.make:66：CMakeFiles/cmTC_a4cd3.dir/src.cxx.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_a4cd3/fast] 错误 2
+
+
+Source file was:
+
+  #include <vector>
+  template<typename T>
+  class ct2
+  {
+  public:
+    typedef T type;
+    void func();
+  };
+
+  template<typename T>
+  void ct2<T>::func()
+  {
+    std::vector<T> vec;
+    std::vector<T>::iterator itr = vec.begin();
+  }
+
+  int main(int argc, char **argv)
+  {
+    ct2<double> o2;
+    o2.func();
+    return 0;
+  }
+  
+Determining if files numa.h exist failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_35c2c/fast && /usr/bin/make -f CMakeFiles/cmTC_35c2c.dir/build.make CMakeFiles/cmTC_35c2c.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_35c2c.dir/HAVE_NUMA_H.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_35c2c.dir/HAVE_NUMA_H.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_NUMA_H.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_NUMA_H.c:2:18: fatal error: numa.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_35c2c.dir/build.make:66：CMakeFiles/cmTC_35c2c.dir/HAVE_NUMA_H.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_35c2c/fast] 错误 2
+
+
+Source:
+/* */
+#include <numa.h>
+
+
+int main(void){return 0;}
+
+Determining if files numaif.h exist failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_dd4e3/fast && /usr/bin/make -f CMakeFiles/cmTC_dd4e3.dir/build.make CMakeFiles/cmTC_dd4e3.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_dd4e3.dir/HAVE_NUMAIF_H.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_dd4e3.dir/HAVE_NUMAIF_H.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_NUMAIF_H.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_NUMAIF_H.c:2:20: fatal error: numaif.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_dd4e3.dir/build.make:66：CMakeFiles/cmTC_dd4e3.dir/HAVE_NUMAIF_H.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_dd4e3/fast] 错误 2
+
+
+Source:
+/* */
+#include <numaif.h>
+
+
+int main(void){return 0;}
+
+Determining size of socklen_t failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8c653/fast && /usr/bin/make -f CMakeFiles/cmTC_8c653.dir/build.make CMakeFiles/cmTC_8c653.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_8c653.dir/SIZEOF_SOCKLEN_T.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_8c653.dir/SIZEOF_SOCKLEN_T.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckTypeSize/SIZEOF_SOCKLEN_T.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckTypeSize/SIZEOF_SOCKLEN_T.c:25:12: error: ‘socklen_t’ undeclared here (not in a function)
+make[1]: *** [CMakeFiles/cmTC_8c653.dir/build.make:66：CMakeFiles/cmTC_8c653.dir/SIZEOF_SOCKLEN_T.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_8c653/fast] 错误 2
+
+
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckTypeSize/SIZEOF_SOCKLEN_T.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#elif defined(__aarch64__)
+# define KEY '_','_','a','a','r','c','h','6','4','_','_'
+#elif defined(__ARM_ARCH_7A__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','A','_','_'
+#elif defined(__ARM_ARCH_7S__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','S','_','_'
+#endif
+
+#define SIZE (sizeof(socklen_t))
+static char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Performing C SOURCE FILE Test HAVE_GETPW_R_DRAFT failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_55b4d/fast && /usr/bin/make -f CMakeFiles/cmTC_55b4d.dir/build.make CMakeFiles/cmTC_55b4d.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_55b4d.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_GETPW_R_DRAFT   -o CMakeFiles/cmTC_55b4d.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:6:12: error: too few arguments to function ‘getpwnam_r’
+In file included from /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:4:0:
+/usr/include/pwd.h:151:12: note: declared here
+make[1]: *** [CMakeFiles/cmTC_55b4d.dir/build.make:66：CMakeFiles/cmTC_55b4d.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_55b4d/fast] 错误 2
+
+
+Source file was:
+
+  #include <stdlib.h>
+  #include <sys/types.h>
+  #include <pwd.h>
+  int main() {
+    struct passwd *pwd = getpwnam_r(NULL, NULL, NULL, 0);
+    return pwd != NULL;
+  }
+Determining if the function vis exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bfe15/fast && /usr/bin/make -f CMakeFiles/cmTC_bfe15.dir/build.make CMakeFiles/cmTC_bfe15.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_bfe15.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=vis   -o CMakeFiles/cmTC_bfe15.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_bfe15
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bfe15.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=vis    -rdynamic CMakeFiles/cmTC_bfe15.dir/CheckFunctionExists.c.o  -o cmTC_bfe15  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_bfe15.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `vis'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_bfe15.dir/build.make:87：cmTC_bfe15] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_bfe15/fast] 错误 2
+
+
+
+Determining if the function unvis exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_8fe22/fast && /usr/bin/make -f CMakeFiles/cmTC_8fe22.dir/build.make CMakeFiles/cmTC_8fe22.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_8fe22.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=unvis   -o CMakeFiles/cmTC_8fe22.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_8fe22
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8fe22.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=unvis    -rdynamic CMakeFiles/cmTC_8fe22.dir/CheckFunctionExists.c.o  -o cmTC_8fe22  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_8fe22.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `unvis'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_8fe22.dir/build.make:87：cmTC_8fe22] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_8fe22/fast] 错误 2
+
+
+
+Determining if the function __secure_getenv exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_324f6/fast && /usr/bin/make -f CMakeFiles/cmTC_324f6.dir/build.make CMakeFiles/cmTC_324f6.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_324f6.dir/CheckFunctionExists.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=__secure_getenv   -o CMakeFiles/cmTC_324f6.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_324f6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_324f6.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DCHECK_FUNCTION_EXISTS=__secure_getenv    -rdynamic CMakeFiles/cmTC_324f6.dir/CheckFunctionExists.c.o  -o cmTC_324f6  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_324f6.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text+0x10): undefined reference to `__secure_getenv'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_324f6.dir/build.make:87：cmTC_324f6] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_324f6/fast] 错误 2
+
+
+
+Performing C SOURCE FILE Test HAVE_STRINGOP_OVERFLOW failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e43d2/fast && /usr/bin/make -f CMakeFiles/cmTC_e43d2.dir/build.make CMakeFiles/cmTC_e43d2.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_e43d2.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_STRINGOP_OVERFLOW  -Wstringop-overflow   -o CMakeFiles/cmTC_e43d2.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command line option ‘-Wstringop-overflow’
+make[1]: *** [CMakeFiles/cmTC_e43d2.dir/build.make:66：CMakeFiles/cmTC_e43d2.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_e43d2/fast] 错误 2
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_STRINGOP_TRUNCATION failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d5241/fast && /usr/bin/make -f CMakeFiles/cmTC_d5241.dir/build.make CMakeFiles/cmTC_d5241.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_d5241.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_STRINGOP_TRUNCATION  -Wstringop-truncation   -o CMakeFiles/cmTC_d5241.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command line option ‘-Wstringop-truncation’
+make[1]: *** [CMakeFiles/cmTC_d5241.dir/build.make:66：CMakeFiles/cmTC_d5241.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_d5241/fast] 错误 2
+
+
+Source file was:
+int main(void) { return 0; }
+Determining if the include file netinet/in6.h exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0bb50/fast && /usr/bin/make -f CMakeFiles/cmTC_0bb50.dir/build.make CMakeFiles/cmTC_0bb50.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_0bb50.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings    -o CMakeFiles/cmTC_0bb50.dir/CheckIncludeFile.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:25: fatal error: netinet/in6.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_0bb50.dir/build.make:66：CMakeFiles/cmTC_0bb50.dir/CheckIncludeFile.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_0bb50/fast] 错误 2
+
+
+
+Determining if the include file port.h exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_6f38c/fast && /usr/bin/make -f CMakeFiles/cmTC_6f38c.dir/build.make CMakeFiles/cmTC_6f38c.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_6f38c.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings    -o CMakeFiles/cmTC_6f38c.dir/CheckIncludeFile.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:18: fatal error: port.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_6f38c.dir/build.make:66：CMakeFiles/cmTC_6f38c.dir/CheckIncludeFile.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_6f38c/fast] 错误 2
+
+
+
+Determining if the include file sys/devpoll.h exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0732f/fast && /usr/bin/make -f CMakeFiles/cmTC_0732f.dir/build.make CMakeFiles/cmTC_0732f.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_0732f.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings    -o CMakeFiles/cmTC_0732f.dir/CheckIncludeFile.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:25: fatal error: sys/devpoll.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_0732f.dir/build.make:66：CMakeFiles/cmTC_0732f.dir/CheckIncludeFile.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_0732f/fast] 错误 2
+
+
+
+Determining if the include file sys/event.h exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_dd2a2/fast && /usr/bin/make -f CMakeFiles/cmTC_dd2a2.dir/build.make CMakeFiles/cmTC_dd2a2.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_dd2a2.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings    -o CMakeFiles/cmTC_dd2a2.dir/CheckIncludeFile.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:23: fatal error: sys/event.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_dd2a2.dir/build.make:66：CMakeFiles/cmTC_dd2a2.dir/CheckIncludeFile.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_dd2a2/fast] 错误 2
+
+
+
+Determining if the include file mach/mach_time.h exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_085a0/fast && /usr/bin/make -f CMakeFiles/cmTC_085a0.dir/build.make CMakeFiles/cmTC_085a0.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_085a0.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings    -o CMakeFiles/cmTC_085a0.dir/CheckIncludeFile.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:28: fatal error: mach/mach_time.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_085a0.dir/build.make:66：CMakeFiles/cmTC_085a0.dir/CheckIncludeFile.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_085a0/fast] 错误 2
+
+
+
+Performing C SOURCE FILE Test HAVE_PREPROCESSOR_WARNINGS failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ab395/fast && /usr/bin/make -f CMakeFiles/cmTC_ab395.dir/build.make CMakeFiles/cmTC_ab395.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_ab395.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DHAVE_PREPROCESSOR_WARNINGS  -W#warnings   -o CMakeFiles/cmTC_ab395.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command line option ‘-W#warnings’
+make[1]: *** [CMakeFiles/cmTC_ab395.dir/build.make:66：CMakeFiles/cmTC_ab395.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_ab395/fast] 错误 2
+
+
+Source file was:
+int main(void) { return 0; }
+Determining if the function kqueue exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_ba3d2/fast && /usr/bin/make -f CMakeFiles/cmTC_ba3d2.dir/build.make CMakeFiles/cmTC_ba3d2.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_ba3d2.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=kqueue   -o CMakeFiles/cmTC_ba3d2.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_ba3d2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ba3d2.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=kqueue    -rdynamic CMakeFiles/cmTC_ba3d2.dir/CheckFunctionExistsEx.c.o  -o cmTC_ba3d2  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_ba3d2.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `kqueue'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_ba3d2.dir/build.make:87：cmTC_ba3d2] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_ba3d2/fast] 错误 2
+
+
+
+Determining if the function port_create exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f4ce7/fast && /usr/bin/make -f CMakeFiles/cmTC_f4ce7.dir/build.make CMakeFiles/cmTC_f4ce7.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_f4ce7.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=port_create   -o CMakeFiles/cmTC_f4ce7.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_f4ce7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f4ce7.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=port_create    -rdynamic CMakeFiles/cmTC_f4ce7.dir/CheckFunctionExistsEx.c.o  -o cmTC_f4ce7  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_f4ce7.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `port_create'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_f4ce7.dir/build.make:87：cmTC_f4ce7] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_f4ce7/fast] 错误 2
+
+
+
+Determining if the function strlcpy exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_765a3/fast && /usr/bin/make -f CMakeFiles/cmTC_765a3.dir/build.make CMakeFiles/cmTC_765a3.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_765a3.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=strlcpy   -o CMakeFiles/cmTC_765a3.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_765a3
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_765a3.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=strlcpy    -rdynamic CMakeFiles/cmTC_765a3.dir/CheckFunctionExistsEx.c.o  -o cmTC_765a3  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_765a3.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `strlcpy'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_765a3.dir/build.make:87：cmTC_765a3] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_765a3/fast] 错误 2
+
+
+
+Determining if the function arc4random exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_f8d82/fast && /usr/bin/make -f CMakeFiles/cmTC_f8d82.dir/build.make CMakeFiles/cmTC_f8d82.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_f8d82.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=arc4random   -o CMakeFiles/cmTC_f8d82.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_f8d82
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f8d82.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=arc4random    -rdynamic CMakeFiles/cmTC_f8d82.dir/CheckFunctionExistsEx.c.o  -o cmTC_f8d82  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_f8d82.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `arc4random'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_f8d82.dir/build.make:87：cmTC_f8d82] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_f8d82/fast] 错误 2
+
+
+
+Determining if the function arc4random_buf exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_0239f/fast && /usr/bin/make -f CMakeFiles/cmTC_0239f.dir/build.make CMakeFiles/cmTC_0239f.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_0239f.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=arc4random_buf   -o CMakeFiles/cmTC_0239f.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_0239f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0239f.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=arc4random_buf    -rdynamic CMakeFiles/cmTC_0239f.dir/CheckFunctionExistsEx.c.o  -o cmTC_0239f  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_0239f.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `arc4random_buf'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_0239f.dir/build.make:87：cmTC_0239f] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_0239f/fast] 错误 2
+
+
+
+Determining if the function issetugid exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_445ff/fast && /usr/bin/make -f CMakeFiles/cmTC_445ff.dir/build.make CMakeFiles/cmTC_445ff.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_445ff.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=issetugid   -o CMakeFiles/cmTC_445ff.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_445ff
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_445ff.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=issetugid    -rdynamic CMakeFiles/cmTC_445ff.dir/CheckFunctionExistsEx.c.o  -o cmTC_445ff  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_445ff.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `issetugid'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_445ff.dir/build.make:87：cmTC_445ff] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_445ff/fast] 错误 2
+
+
+
+Determining if the function mach_absolute_time exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_98ce6/fast && /usr/bin/make -f CMakeFiles/cmTC_98ce6.dir/build.make CMakeFiles/cmTC_98ce6.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_98ce6.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=mach_absolute_time   -o CMakeFiles/cmTC_98ce6.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_98ce6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_98ce6.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=mach_absolute_time    -rdynamic CMakeFiles/cmTC_98ce6.dir/CheckFunctionExistsEx.c.o  -o cmTC_98ce6  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_98ce6.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `mach_absolute_time'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_98ce6.dir/build.make:87：cmTC_98ce6] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_98ce6/fast] 错误 2
+
+
+
+Determining if the function timeradd exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e7eb2/fast && /usr/bin/make -f CMakeFiles/cmTC_e7eb2.dir/build.make CMakeFiles/cmTC_e7eb2.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_e7eb2.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=timeradd   -o CMakeFiles/cmTC_e7eb2.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_e7eb2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e7eb2.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=timeradd    -rdynamic CMakeFiles/cmTC_e7eb2.dir/CheckFunctionExistsEx.c.o  -o cmTC_e7eb2  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_e7eb2.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `timeradd'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_e7eb2.dir/build.make:87：cmTC_e7eb2] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_e7eb2/fast] 错误 2
+
+
+
+Determining if the function timerclear exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_35be2/fast && /usr/bin/make -f CMakeFiles/cmTC_35be2.dir/build.make CMakeFiles/cmTC_35be2.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_35be2.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=timerclear   -o CMakeFiles/cmTC_35be2.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_35be2
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_35be2.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=timerclear    -rdynamic CMakeFiles/cmTC_35be2.dir/CheckFunctionExistsEx.c.o  -o cmTC_35be2  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_35be2.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `timerclear'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_35be2.dir/build.make:87：cmTC_35be2] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_35be2/fast] 错误 2
+
+
+
+Determining if the function timercmp exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_9378c/fast && /usr/bin/make -f CMakeFiles/cmTC_9378c.dir/build.make CMakeFiles/cmTC_9378c.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_9378c.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=timercmp   -o CMakeFiles/cmTC_9378c.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_9378c
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9378c.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=timercmp    -rdynamic CMakeFiles/cmTC_9378c.dir/CheckFunctionExistsEx.c.o  -o cmTC_9378c  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_9378c.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `timercmp'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_9378c.dir/build.make:87：cmTC_9378c] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_9378c/fast] 错误 2
+
+
+
+Determining if the function timerisset exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7aff1/fast && /usr/bin/make -f CMakeFiles/cmTC_7aff1.dir/build.make CMakeFiles/cmTC_7aff1.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_7aff1.dir/CheckFunctionExistsEx.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=timerisset   -o CMakeFiles/cmTC_7aff1.dir/CheckFunctionExistsEx.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/extra/libevent/libevent-2.1.11-stable/cmake/CheckFunctionExistsEx.c
+Linking C executable cmTC_7aff1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7aff1.dir/link.txt --verbose=1
+/usr/bin/cc -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DCHECK_FUNCTION_EXISTS=timerisset    -rdynamic CMakeFiles/cmTC_7aff1.dir/CheckFunctionExistsEx.c.o  -o cmTC_7aff1  -lm -lcrypt -ldl -lpthread -lrt 
+/usr/bin/ld: CMakeFiles/cmTC_7aff1.dir/CheckFunctionExistsEx.c.o: in function `main':
+CheckFunctionExistsEx.c:(.text+0x10): undefined reference to `timerisset'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_7aff1.dir/build.make:87：cmTC_7aff1] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_7aff1/fast] 错误 2
+
+
+
+Determining if the prototype gethostbyname_r exists for EVENT__HAVE_GETHOSTBYNAME_R_3_ARG failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_37b83/fast && /usr/bin/make -f CMakeFiles/cmTC_37b83.dir/build.make CMakeFiles/cmTC_37b83.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_37b83.dir/CheckPrototypeDefinition.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings    -o CMakeFiles/cmTC_37b83.dir/CheckPrototypeDefinition.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:14:66: warning: ‘struct hostent_data’ declared inside parameter list [enabled by default]
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:14:66: warning: its scope is only this definition or declaration, which is probably not what you want [enabled by default]
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:14:5: error: conflicting types for ‘gethostbyname_r’
+In file included from /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:1:0:
+/usr/include/netdb.h:177:12: note: previous declaration of ‘gethostbyname_r’ was here
+make[1]: *** [CMakeFiles/cmTC_37b83.dir/build.make:66：CMakeFiles/cmTC_37b83.dir/CheckPrototypeDefinition.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_37b83/fast] 错误 2
+
+
+
+#include <netdb.h>
+
+
+static void cmakeRequireSymbol(int dummy, ...) {
+  (void) dummy;
+}
+
+static void checkSymbol(void) {
+#ifndef gethostbyname_r
+  cmakeRequireSymbol(0, &gethostbyname_r);
+#endif
+}
+
+int gethostbyname_r(const char *name, struct hostent *hp, struct hostent_data *hdata) {
+  return 0;
+}
+
+#ifdef __CLASSIC_C__
+int main() {
+  int ac;
+  char*av[];
+#else
+int main(int ac, char *av[]) {
+#endif
+  checkSymbol();
+  if (ac > 1000) {
+    return *av[0];
+  }
+  return 0;
+}
+
+
+Determining if the prototype gethostbyname_r exists for EVENT__HAVE_GETHOSTBYNAME_R_5_ARG failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_eae58/fast && /usr/bin/make -f CMakeFiles/cmTC_eae58.dir/build.make CMakeFiles/cmTC_eae58.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_eae58.dir/CheckPrototypeDefinition.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings    -o CMakeFiles/cmTC_eae58.dir/CheckPrototypeDefinition.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:14:17: error: conflicting types for ‘gethostbyname_r’
+In file included from /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:1:0:
+/usr/include/netdb.h:177:12: note: previous declaration of ‘gethostbyname_r’ was here
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c: In function ‘gethostbyname_r’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:15:10: error: ‘NULL’ undeclared (first use in this function)
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:15:10: note: each undeclared identifier is reported only once for each function it appears in
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckPrototypeDefinition.c:16:1: warning: control reaches end of non-void function [-Wreturn-type]
+make[1]: *** [CMakeFiles/cmTC_eae58.dir/build.make:66：CMakeFiles/cmTC_eae58.dir/CheckPrototypeDefinition.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_eae58/fast] 错误 2
+
+
+
+#include <netdb.h>
+
+
+static void cmakeRequireSymbol(int dummy, ...) {
+  (void) dummy;
+}
+
+static void checkSymbol(void) {
+#ifndef gethostbyname_r
+  cmakeRequireSymbol(0, &gethostbyname_r);
+#endif
+}
+
+struct hostent *gethostbyname_r(const char *name, struct hostent *hp, char *buf, size_t buflen, int *herr) {
+  return NULL;
+}
+
+#ifdef __CLASSIC_C__
+int main() {
+  int ac;
+  char*av[];
+#else
+int main(int ac, char *av[]) {
+#endif
+  checkSymbol();
+  if (ac > 1000) {
+    return *av[0];
+  }
+  return 0;
+}
+
+
+Performing C SOURCE FILE Test EVENT__HAVE_DECL_KERN_ARND failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d4f63/fast && /usr/bin/make -f CMakeFiles/cmTC_d4f63.dir/build.make CMakeFiles/cmTC_d4f63.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_d4f63.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DEVENT__HAVE_DECL_KERN_ARND   -o CMakeFiles/cmTC_d4f63.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+In file included from /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:2:0:
+/usr/include/x86_64-linux-gnu/sys/sysctl.h:21:2: warning: #warning "The <sys/sysctl.h> header is deprecated and will be removed." [-Wcpp]
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:3:13: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:3:28: error: ‘KERN_ARND’ undeclared (first use in this function)
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:3:28: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_d4f63.dir/build.make:66：CMakeFiles/cmTC_d4f63.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_d4f63/fast] 错误 2
+
+
+Source file was:
+
+          #include <sys/sysctl.h>
+        int main() { (void)KERN_ARND; return 0; }
+Determining size of SSIZE_T failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_908a3/fast && /usr/bin/make -f CMakeFiles/cmTC_908a3.dir/build.make CMakeFiles/cmTC_908a3.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_908a3.dir/EVENT__SIZEOF_SSIZE_T_UPPER.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings    -o CMakeFiles/cmTC_908a3.dir/EVENT__SIZEOF_SSIZE_T_UPPER.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckTypeSize/EVENT__SIZEOF_SSIZE_T_UPPER.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckTypeSize/EVENT__SIZEOF_SSIZE_T_UPPER.c:31:12: error: ‘SSIZE_T’ undeclared here (not in a function)
+make[1]: *** [CMakeFiles/cmTC_908a3.dir/build.make:66：CMakeFiles/cmTC_908a3.dir/EVENT__SIZEOF_SSIZE_T_UPPER.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_908a3/fast] 错误 2
+
+
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckTypeSize/EVENT__SIZEOF_SSIZE_T_UPPER.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+#include "sys/types.h"
+#include "sys/socket.h"
+#include "netinet/in.h"
+#include "sys/un.h"
+#include "fcntl.h"
+#include "sys/time.h"
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#elif defined(__aarch64__)
+# define KEY '_','_','a','a','r','c','h','6','4','_','_'
+#elif defined(__ARM_ARCH_7A__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','A','_','_'
+#elif defined(__ARM_ARCH_7S__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','S','_','_'
+#endif
+
+#define SIZE (sizeof(SSIZE_T))
+static char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Performing C SOURCE FILE Test EVENT__HAVE_STRUCT_SOCKADDR_IN6_SIN6_LEN failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_b3dfd/fast && /usr/bin/make -f CMakeFiles/cmTC_b3dfd.dir/build.make CMakeFiles/cmTC_b3dfd.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_b3dfd.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DEVENT__HAVE_STRUCT_SOCKADDR_IN6_SIN6_LEN   -o CMakeFiles/cmTC_b3dfd.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:6:5: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:8:42: error: ‘struct sockaddr_in6’ has no member named ‘sin6_len’
+make[1]: *** [CMakeFiles/cmTC_b3dfd.dir/build.make:66：CMakeFiles/cmTC_b3dfd.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_b3dfd/fast] 错误 2
+
+
+Source file was:
+
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <netdb.h>
+
+int main()
+{
+  (void)sizeof(((struct sockaddr_in6 *)0)->sin6_len);
+  return 0;
+}
+
+Performing C SOURCE FILE Test EVENT__HAVE_STRUCT_SOCKADDR_IN_SIN_LEN failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_35a57/fast && /usr/bin/make -f CMakeFiles/cmTC_35a57.dir/build.make CMakeFiles/cmTC_35a57.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_35a57.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DEVENT__HAVE_STRUCT_SOCKADDR_IN_SIN_LEN   -o CMakeFiles/cmTC_35a57.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:6:5: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:8:42: error: ‘struct sockaddr_in6’ has no member named ‘sin_len’
+make[1]: *** [CMakeFiles/cmTC_35a57.dir/build.make:66：CMakeFiles/cmTC_35a57.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_35a57/fast] 错误 2
+
+
+Source file was:
+
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <netdb.h>
+
+int main()
+{
+  (void)sizeof(((struct sockaddr_in6 *)0)->sin_len);
+  return 0;
+}
+
+Performing C SOURCE FILE Test EVENT__HAVE_STRUCT_SOCKADDR_STORAGE___SS_FAMILY failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_31d60/fast && /usr/bin/make -f CMakeFiles/cmTC_31d60.dir/build.make CMakeFiles/cmTC_31d60.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_31d60.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -fPIC -Wall -Wextra -Wno-unused-parameter -Wstrict-aliasing -Wstrict-prototypes -fno-strict-aliasing -Wmissing-prototypes -Winit-self -Wmissing-field-initializers -Wdeclaration-after-statement -Waddress -Wnormalized=id -Woverride-init -Wlogical-op -Wwrite-strings -DEVENT__HAVE_STRUCT_SOCKADDR_STORAGE___SS_FAMILY   -o CMakeFiles/cmTC_31d60.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:6:5: warning: function declaration isn’t a prototype [-Wstrict-prototypes]
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:8:46: error: ‘struct sockaddr_storage’ has no member named ‘__ss_family’
+make[1]: *** [CMakeFiles/cmTC_31d60.dir/build.make:66：CMakeFiles/cmTC_31d60.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_31d60/fast] 错误 2
+
+
+Source file was:
+
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <netdb.h>
+
+int main()
+{
+  (void)sizeof(((struct sockaddr_storage *)0)->__ss_family);
+  return 0;
+}
+
+Determining if files sys/types.h;sasl/sasl.h exist failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_a271a/fast && /usr/bin/make -f CMakeFiles/cmTC_a271a.dir/build.make CMakeFiles/cmTC_a271a.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_a271a.dir/HAVE_SASL_SASL_H.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_a271a.dir/HAVE_SASL_SASL_H.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_SASL_SASL_H.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CheckIncludeFiles/HAVE_SASL_SASL_H.c:3:23: fatal error: sasl/sasl.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_a271a.dir/build.make:66：CMakeFiles/cmTC_a271a.dir/HAVE_SASL_SASL_H.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_a271a/fast] 错误 2
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <sasl/sasl.h>
+
+
+int main(void){return 0;}
+
+Determining if the include file lber.h exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_25a6b/fast && /usr/bin/make -f CMakeFiles/cmTC_25a6b.dir/build.make CMakeFiles/cmTC_25a6b.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_25a6b.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_25a6b.dir/CheckIncludeFile.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:18: fatal error: lber.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_25a6b.dir/build.make:66：CMakeFiles/cmTC_25a6b.dir/CheckIncludeFile.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_25a6b/fast] 错误 2
+
+
+
+Determining if the include file ldap.h exists failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e9b1e/fast && /usr/bin/make -f CMakeFiles/cmTC_e9b1e.dir/build.make CMakeFiles/cmTC_e9b1e.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_e9b1e.dir/CheckIncludeFile.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC    -o CMakeFiles/cmTC_e9b1e.dir/CheckIncludeFile.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:18: fatal error: ldap.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_e9b1e.dir/build.make:66：CMakeFiles/cmTC_e9b1e.dir/CheckIncludeFile.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_e9b1e/fast] 错误 2
+
+
+
+Performing C SOURCE FILE Test HAVE_SYS_THREAD_SELFID failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_bd60b/fast && /usr/bin/make -f CMakeFiles/cmTC_bd60b.dir/build.make CMakeFiles/cmTC_bd60b.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_bd60b.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_SYS_THREAD_SELFID   -o CMakeFiles/cmTC_bd60b.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:7:36: error: ‘SYS_thread_selfid’ undeclared (first use in this function)
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:7:36: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_bd60b.dir/build.make:66：CMakeFiles/cmTC_bd60b.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_bd60b/fast] 错误 2
+
+
+Source file was:
+
+#include <sys/types.h>
+#include <sys/syscall.h>
+#include <unistd.h>
+int main(int ac, char **av)
+{
+  unsigned long long tid = syscall(SYS_thread_selfid);
+  return (tid != 0 ? 0 : 1);
+}
+Performing C SOURCE FILE Test HAVE_PTHREAD_GETTHREADID_NP failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c0f82/fast && /usr/bin/make -f CMakeFiles/cmTC_c0f82.dir/build.make CMakeFiles/cmTC_c0f82.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_c0f82.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_PTHREAD_GETTHREADID_NP   -o CMakeFiles/cmTC_c0f82.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:2:24: fatal error: pthread_np.h: 没有那个文件或目录
+compilation terminated.
+make[1]: *** [CMakeFiles/cmTC_c0f82.dir/build.make:66：CMakeFiles/cmTC_c0f82.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_c0f82/fast] 错误 2
+
+
+Source file was:
+
+#include <pthread_np.h>
+int main(int ac, char **av)
+{
+  unsigned long long tid = pthread_getthreadid_np();
+  return (tid != 0 ? 0 : 1);
+}
+Performing C++ SOURCE FILE Test HAVE_IMPLICIT_FALLTHROUGH failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_2c947/fast && /usr/bin/make -f CMakeFiles/cmTC_2c947.dir/build.make CMakeFiles/cmTC_2c947.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_2c947.dir/src.cxx.o
+/usr/bin/c++  -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -DHAVE_IMPLICIT_FALLTHROUGH  -Wimplicit-fallthrough=2   -o CMakeFiles/cmTC_2c947.dir/src.cxx.o -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option ‘-Wimplicit-fallthrough=2’
+make[1]: *** [CMakeFiles/cmTC_2c947.dir/build.make:66：CMakeFiles/cmTC_2c947.dir/src.cxx.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_2c947/fast] 错误 2
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C++ SOURCE FILE Test HAVE_CAST_FUNCTION_TYPE failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7fec0/fast && /usr/bin/make -f CMakeFiles/cmTC_7fec0.dir/build.make CMakeFiles/cmTC_7fec0.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_7fec0.dir/src.cxx.o
+/usr/bin/c++  -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Woverloaded-virtual -Wno-unused-parameter -Werror -DHAVE_CAST_FUNCTION_TYPE  -Wcast-function-type   -o CMakeFiles/cmTC_7fec0.dir/src.cxx.o -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option ‘-Wcast-function-type’
+make[1]: *** [CMakeFiles/cmTC_7fec0.dir/build.make:66：CMakeFiles/cmTC_7fec0.dir/src.cxx.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_7fec0/fast] 错误 2
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test HAVE_STRUCT_SOCKADDR_SA_LEN failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e36cd/fast && /usr/bin/make -f CMakeFiles/cmTC_e36cd.dir/build.make CMakeFiles/cmTC_e36cd.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_e36cd.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Wwrite-strings -Wdeclaration-after-statement -Werror -DHAVE_STRUCT_SOCKADDR_SA_LEN -Wno-error   -o CMakeFiles/cmTC_e36cd.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:6:38: error: ‘struct sockaddr’ has no member named ‘sa_len’
+make[1]: *** [CMakeFiles/cmTC_e36cd.dir/build.make:66：CMakeFiles/cmTC_e36cd.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_e36cd/fast] 错误 2
+
+
+Source file was:
+
+#include <sys/socket.h>
+
+int main()
+{
+  (void)sizeof(((struct sockaddr *)0)->sa_len);
+  return 0;
+}
+
+Performing C SOURCE FILE Test HAVE_RPC_INLINE_T failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_47797/fast && /usr/bin/make -f CMakeFiles/cmTC_47797.dir/build.make CMakeFiles/cmTC_47797.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_47797.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Wwrite-strings -Wdeclaration-after-statement -Werror -DHAVE_RPC_INLINE_T -Wno-error   -o CMakeFiles/cmTC_47797.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:3:20: error: unknown type name ‘rpc_inline_t’
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:3:33: warning: unused variable ‘x’ [-Wunused-variable]
+make[1]: *** [CMakeFiles/cmTC_47797.dir/build.make:66：CMakeFiles/cmTC_47797.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_47797/fast] 错误 2
+
+
+Source file was:
+
+  #include <rpc/types.h>
+  int main(void) { rpc_inline_t x; return 0; }
+  
+Performing C SOURCE FILE Test OLD_XDR failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_7a6c1/fast && /usr/bin/make -f CMakeFiles/cmTC_7a6c1.dir/build.make CMakeFiles/cmTC_7a6c1.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_7a6c1.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Wwrite-strings -Wdeclaration-after-statement -Werror -DOLD_XDR -Werror=sign-conversion   -o CMakeFiles/cmTC_7a6c1.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:3:5: error: negative integer implicitly converted to unsigned type [-Werror=sign-conversion]
+cc1: all warnings being treated as errors
+make[1]: *** [CMakeFiles/cmTC_7a6c1.dir/build.make:66：CMakeFiles/cmTC_7a6c1.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_7a6c1/fast] 错误 2
+
+
+Source file was:
+
+    #include <rpc/xdr.h>
+    int main() { XDR xdr; xdr.x_handy = -1; return (int)xdr.x_handy; }
+    
+Performing C SOURCE FILE Test X_GETPOSTN_NOT_USE_CONST failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_d1b29/fast && /usr/bin/make -f CMakeFiles/cmTC_d1b29.dir/build.make CMakeFiles/cmTC_d1b29.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_d1b29.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Wwrite-strings -Wdeclaration-after-statement -Werror -DX_GETPOSTN_NOT_USE_CONST -Werror=sign-conversion   -o CMakeFiles/cmTC_d1b29.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:8:22: error: assignment from incompatible pointer type [-Werror]
+cc1: all warnings being treated as errors
+make[1]: *** [CMakeFiles/cmTC_d1b29.dir/build.make:66：CMakeFiles/cmTC_d1b29.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_d1b29/fast] 错误 2
+
+
+Source file was:
+
+    #include <rpc/xdr.h>
+    u_int getpostn(XDR* xdr) { return (u_int)xdr->x_handy; }
+    int main() {
+      XDR xdr;
+      struct xdr_ops ops;
+
+      ops.x_getpostn = getpostn;
+      return (int)ops.x_getpostn(&xdr);
+    }
+    
+Performing C SOURCE FILE Test HAS_INCOMPATIBLE_POINTER_TYPES failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_291f7/fast && /usr/bin/make -f CMakeFiles/cmTC_291f7.dir/build.make CMakeFiles/cmTC_291f7.dir/build
+make[1]: Entering directory '/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_291f7.dir/src.c.o
+/usr/bin/cc   -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Wwrite-strings -Wdeclaration-after-statement -Werror -DHAS_INCOMPATIBLE_POINTER_TYPES -Werror=sign-conversion   -Wincompatible-pointer-types -o CMakeFiles/cmTC_291f7.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command line option '-Wincompatible-pointer-types'
+make[1]: *** [CMakeFiles/cmTC_291f7.dir/build.make:66: CMakeFiles/cmTC_291f7.dir/src.c.o] Error 1
+make[1]: Leaving directory '/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_291f7/fast] Error 2
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test X_PUTLONG_NOT_USE_CONST failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_16581/fast && /usr/bin/make -f CMakeFiles/cmTC_16581.dir/build.make CMakeFiles/cmTC_16581.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building C object CMakeFiles/cmTC_16581.dir/src.c.o
+/usr/bin/cc -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Wwrite-strings -Wdeclaration-after-statement -Werror -DX_PUTLONG_NOT_USE_CONST -Werror=sign-conversion -Werror   -o CMakeFiles/cmTC_16581.dir/src.c.o   -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c: In function ‘main’:
+/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.c:10:21: error: assignment from incompatible pointer type [-Werror]
+cc1: all warnings being treated as errors
+make[1]: *** [CMakeFiles/cmTC_16581.dir/build.make:66：CMakeFiles/cmTC_16581.dir/src.c.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_16581/fast] 错误 2
+
+
+Source file was:
+
+    #include <rpc/xdr.h>
+    bool_t putlong(XDR* xdr, long *longp)
+                   { return (bool_t)(*longp + xdr->x_handy); }
+    int main() {
+      XDR xdr;
+      struct xdr_ops ops;
+      long l;
+
+      ops.x_putlong = putlong;
+      return (int)ops.x_putlong(&xdr, &l);
+    }
+    
+Performing C++ SOURCE FILE Test HAVE_MISLEADING_INDENTATION failed with the following output:
+Change Dir: /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_1f049/fast && /usr/bin/make -f CMakeFiles/cmTC_1f049.dir/build.make CMakeFiles/cmTC_1f049.dir/build
+make[1]: 进入目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+Building CXX object CMakeFiles/cmTC_1f049.dir/src.cxx.o
+/usr/bin/c++  -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGE_FILES -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS  -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Woverloaded-virtual -Wno-unused-parameter -Werror -DHAVE_MISLEADING_INDENTATION  -Wmisleading-indentation   -o CMakeFiles/cmTC_1f049.dir/src.cxx.o -c /home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option ‘-Wmisleading-indentation’
+make[1]: *** [CMakeFiles/cmTC_1f049.dir/build.make:66：CMakeFiles/cmTC_1f049.dir/src.cxx.o] 错误 1
+make[1]: 离开目录“/home/wei/workspace/SOURCE_CODE/MySQL/001.MySQL源码/mysql-server-5.7/BUILD/CMakeFiles/CMakeTmp”
+make: *** [Makefile:121：cmTC_1f049/fast] 错误 2
+
+
+Source file was:
+int main(void) { return 0; }
