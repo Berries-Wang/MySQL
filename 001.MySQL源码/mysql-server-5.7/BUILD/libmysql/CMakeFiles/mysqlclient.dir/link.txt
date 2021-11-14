@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../archive_output_directory/libmysqlclient.a  CMakeFiles/mysqlclient.dir/__/archive_output_directory/mysqlclient_depends.c.o
-/usr/bin/ranlib ../archive_output_directory/libmysqlclient.a

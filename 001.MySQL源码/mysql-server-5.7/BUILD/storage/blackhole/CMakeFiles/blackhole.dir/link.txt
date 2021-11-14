@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../../archive_output_directory/libblackhole.a  CMakeFiles/blackhole.dir/ha_blackhole.cc.o
-/usr/bin/ranlib ../../archive_output_directory/libblackhole.a

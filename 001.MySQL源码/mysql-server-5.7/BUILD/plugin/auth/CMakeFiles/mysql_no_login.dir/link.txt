@@ -1,1 +1,0 @@
-/usr/bin/cc -fPIC -fPIC -fabi-version=2 -fno-omit-frame-pointer -fno-strict-aliasing  -fPIC -Wall -Wextra -Wformat-security -Wvla -Wwrite-strings -Wdeclaration-after-statement -Werror -DENABLED_DEBUG_SYNC -DSAFE_MUTEX -g -fPIC   -shared  -o mysql_no_login.so CMakeFiles/mysql_no_login.dir/mysql_no_login.c.o  -lpthread ../../archive_output_directory/libmysqlservices.a -lpthread 
