@@ -23,6 +23,8 @@
 ------
 
 ## MySQL官方文档作为入口(参考手册),学习查询优化技术
+&nbsp;&nbsp;官方文档:SQL优化>[https://dev.mysql.com/doc/refman/5.7/en/statement-optimization.html](https://dev.mysql.com/doc/refman/5.7/en/statement-optimization.html)
+
 &nbsp;&nbsp;MySQL官方文档:[https://dev.mysql.com/doc/refman/5.7/en/optimization.html](https://dev.mysql.com/doc/refman/5.7/en/optimization.html)
 
 1. Optimization:  n. 最佳化，最优化
