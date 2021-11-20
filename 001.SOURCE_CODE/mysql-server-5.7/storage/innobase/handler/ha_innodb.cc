@@ -213,22 +213,18 @@ enum default_row_format_enum {
 /** Return the InnoDB ROW_FORMAT enum value
 @param[in]	row_format	row_format from "innodb_default_row_format"
 @return InnoDB ROW_FORMAT value from rec_format_t enum. */
-static
-rec_format_t
-get_row_format(
-	ulong row_format)
-{
-	switch(row_format) {
-	case DEFAULT_ROW_FORMAT_REDUNDANT:
-		return(REC_FORMAT_REDUNDANT);
-	case DEFAULT_ROW_FORMAT_COMPACT:
-		return(REC_FORMAT_COMPACT);
-	case DEFAULT_ROW_FORMAT_DYNAMIC:
-		return(REC_FORMAT_DYNAMIC);
-	default:
-		ut_ad(0);
-		return(REC_FORMAT_DYNAMIC);
-	}
+static rec_format_t get_row_format(ulong row_format) {
+  switch (row_format) {
+  case DEFAULT_ROW_FORMAT_REDUNDANT:
+    return (REC_FORMAT_REDUNDANT);
+  case DEFAULT_ROW_FORMAT_COMPACT:
+    return (REC_FORMAT_COMPACT);
+  case DEFAULT_ROW_FORMAT_DYNAMIC:
+    return (REC_FORMAT_DYNAMIC);
+  default:
+    ut_ad(0);
+    return (REC_FORMAT_DYNAMIC);
+  }
 }
 
 static ulong	innodb_default_row_format = DEFAULT_ROW_FORMAT_DYNAMIC;
