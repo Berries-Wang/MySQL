@@ -28,3 +28,8 @@
 &nbsp;&nbsp;MySQL官方文档:[https://dev.mysql.com/doc/refman/5.7/en/optimization.html](https://dev.mysql.com/doc/refman/5.7/en/optimization.html)
 
 1. Optimization:  n. 最佳化，最优化
+
+---
+## 思考
+### 为什么要学习MySQL的优化技术
+&nbsp;&nbsp;有些MySQL提供的优化技术可能有着自己的一些格式，按照这些格式来写才能运用这些优化，因此在写SQL的时候能逐渐的向优化的方向上靠近，提升SQL性能。
