@@ -51,7 +51,7 @@
 #include "mysql/psi/psi.h"
 
 #ifndef PSI_FILE_CALL
-#define PSI_FILE_CALL(M) PSI_DYNAMIC_CALL(M)
+    #define PSI_FILE_CALL(M) PSI_DYNAMIC_CALL(M)
 #endif
 
 /**

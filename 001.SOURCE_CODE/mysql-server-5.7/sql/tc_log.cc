@@ -25,8 +25,8 @@
 #include "log.h"       // sql_print_error
 #include "sql_class.h" // THD
 
-#include "mysql/psi/mysql_file.h"
 #include "pfs_file_provider.h"
+#include "mysql/psi/mysql_file.h"
 
 TC_LOG::enum_result TC_LOG_DUMMY::commit(THD *thd, bool all) {
   return ha_commit_low(thd, all) ? RESULT_ABORTED : RESULT_SUCCESS;
