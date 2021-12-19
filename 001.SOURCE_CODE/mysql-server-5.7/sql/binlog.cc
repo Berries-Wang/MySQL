@@ -8607,15 +8607,16 @@ int MYSQL_BIN_LOG::prepare(THD *thd, bool all)
   but the commit in the engines did not succed, there is a risk of
   inconsistency between the engines and the binary log.
 
-  For binary log group commit, the commit is separated into three
+  For binary log group commit, the commit is separated(分开，分离) into three
   parts:
 
   1. First part consists of filling the necessary caches and
      finalizing them (if they need to be finalized). After this,
      nothing is added to any of the caches.
+     第一部分包括填充必要的缓存和终结它们
 
   2. Second part execute an ordered flush and commit. This will be
-     done using the group commit functionality in ordered_commit.
+     done using the group commit functionality(功能) in ordered_commit.
 
   3. Third part checks any errors resulting from the ordered commit
      and handles them appropriately.
@@ -8624,35 +8625,33 @@ int MYSQL_BIN_LOG::prepare(THD *thd, bool all)
   @retval RESULT_ABORTED   error, transaction was neither logged nor committed
   @retval RESULT_INCONSISTENT  error, transaction was logged but not committed
 */
-TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
-{
+TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all) {
   DBUG_ENTER("MYSQL_BIN_LOG::commit");
-  DBUG_PRINT("info", ("query='%s'",
-                      thd == current_thd ? thd->query().str : NULL));
-  binlog_cache_mngr *cache_mngr= thd_get_cache_mngr(thd);
-  Transaction_ctx *trn_ctx= thd->get_transaction();
-  my_xid xid= trn_ctx->xid_state()->get_xid()->get_my_xid();
-  bool stmt_stuff_logged= false;
-  bool trx_stuff_logged= false;
-  bool skip_commit= is_loggable_xa_prepare(thd);
+  DBUG_PRINT("info",
+             ("query='%s'", thd == current_thd ? thd->query().str : NULL));
+  binlog_cache_mngr *cache_mngr = thd_get_cache_mngr(thd);
+  Transaction_ctx *trn_ctx = thd->get_transaction();
+  my_xid xid = trn_ctx->xid_state()->get_xid()->get_my_xid();
+  bool stmt_stuff_logged = false;
+  bool trx_stuff_logged = false;
+  bool skip_commit = is_loggable_xa_prepare(thd);
 
   DBUG_PRINT("enter", ("thd: 0x%llx, all: %s, xid: %llu, cache_mngr: 0x%llx",
-                       (ulonglong) thd, YESNO(all), (ulonglong) xid,
-                       (ulonglong) cache_mngr));
+                       (ulonglong)thd, YESNO(all), (ulonglong)xid,
+                       (ulonglong)cache_mngr));
 
   /*
     No cache manager means nothing to log, but we still have to commit
     the transaction.
    */
-  if (cache_mngr == NULL)
-  {
+  if (cache_mngr == NULL) {
     if (!skip_commit && ha_commit_low(thd, all))
       DBUG_RETURN(RESULT_ABORTED);
     DBUG_RETURN(RESULT_SUCCESS);
   }
 
-  Transaction_ctx::enum_trx_scope trx_scope=  all ? Transaction_ctx::SESSION :
-                                                    Transaction_ctx::STMT;
+  Transaction_ctx::enum_trx_scope trx_scope =
+      all ? Transaction_ctx::SESSION : Transaction_ctx::STMT;
 
   DBUG_PRINT("debug", ("in_transaction: %s, no_2pc: %s, rw_ha_count: %d",
                        YESNO(thd->in_multi_stmt_transaction_mode()),
@@ -8666,7 +8665,6 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
              ("stmt.cannot_safely_rollback(): %s, stmt_cache_empty: %s",
               YESNO(trn_ctx->cannot_safely_rollback(Transaction_ctx::STMT)),
               YESNO(cache_mngr->stmt_cache.is_binlog_empty())));
-
 
   /*
     If there are no handlertons registered, there is nothing to
@@ -8686,16 +8684,15 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
       cache_mngr->stmt_cache.is_binlog_empty())
     DBUG_RETURN(RESULT_SUCCESS);
 
-  if (thd->lex->sql_command == SQLCOM_XA_COMMIT)
-  {
+  if (thd->lex->sql_command == SQLCOM_XA_COMMIT) {
     /* The Commit phase of the XA two phase logging. */
 
-    bool one_phase= get_xa_opt(thd) == XA_ONE_PHASE;
+    bool one_phase = get_xa_opt(thd) == XA_ONE_PHASE;
     assert(all);
     assert(!skip_commit || one_phase);
 
-    int err= 0;
-    XID_STATE *xs= thd->get_transaction()->xid_state();
+    int err = 0;
+    XID_STATE *xs = thd->get_transaction()->xid_state();
     /*
       XA COMMIT ONE PHASE statement which has not gone through the binary log
       prepare phase, has to end the active XA transaction with appropriate XA
@@ -8707,23 +8704,19 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
       and it has not already been written to binary log. For such transaction
       write the appropriate XA END statement.
     */
-    if (!(is_loggable_xa_prepare(thd))
-        && one_phase
-        && !(xs->is_binlogged())
-        && !cache_mngr->trx_cache.is_binlog_empty())
-    {
+    if (!(is_loggable_xa_prepare(thd)) && one_phase && !(xs->is_binlogged()) &&
+        !cache_mngr->trx_cache.is_binlog_empty()) {
       XA_prepare_log_event end_evt(thd, xs->get_xid(), one_phase);
-      err= cache_mngr->trx_cache.finalize(thd, &end_evt, xs);
-      if (err)
-      {
+      err = cache_mngr->trx_cache.finalize(thd, &end_evt, xs);
+      if (err) {
         DBUG_RETURN(RESULT_ABORTED);
       }
-      trx_stuff_logged= true;
+      trx_stuff_logged = true;
       thd->get_transaction()->xid_state()->set_binlogged();
     }
-    if (DBUG_EVALUATE_IF("simulate_xa_commit_log_failure", true,
-                         do_binlog_xa_commit_rollback(thd, xs->get_xid(),
-                                                      true)))
+    if (DBUG_EVALUATE_IF(
+            "simulate_xa_commit_log_failure", true,
+            do_binlog_xa_commit_rollback(thd, xs->get_xid(), true)))
       DBUG_RETURN(RESULT_ABORTED);
   }
 
@@ -8736,16 +8729,16 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
     Otherwise, we write any empty group(s) to the trx cache at the end
     of the transaction.
   */
-  if (!cache_mngr->stmt_cache.is_binlog_empty())
-  {
+  if (!cache_mngr->stmt_cache.is_binlog_empty()) {
     /*
       Commit parent identification of non-transactional query has
       been deferred until now, except for the mixed transaction case.
     */
-    trn_ctx->store_commit_parent(m_dependency_tracker.get_max_committed_timestamp());
+    trn_ctx->store_commit_parent(
+        m_dependency_tracker.get_max_committed_timestamp());
     if (cache_mngr->stmt_cache.finalize(thd))
       DBUG_RETURN(RESULT_ABORTED);
-    stmt_stuff_logged= true;
+    stmt_stuff_logged = true;
   }
 
   /*
@@ -8754,11 +8747,10 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
      - We are in a transaction and a full transaction is committed.
     Otherwise, we accumulate the changes.
   */
-  if (!cache_mngr->trx_cache.is_binlog_empty() &&
-      ending_trans(thd, all) && !trx_stuff_logged)
-  {
-    const bool real_trans=
-      (all || !trn_ctx->is_active(Transaction_ctx::SESSION));
+  if (!cache_mngr->trx_cache.is_binlog_empty() && ending_trans(thd, all) &&
+      !trx_stuff_logged) {
+    const bool real_trans =
+        (all || !trn_ctx->is_active(Transaction_ctx::SESSION));
 
     /*
       We are committing an XA transaction if it is a "real" transaction
@@ -8771,42 +8763,36 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
       true. This occurs for example if a MyISAM statement is executed
       with row-based replication on.
     */
-    if (is_loggable_xa_prepare(thd))
-    {
+    if (is_loggable_xa_prepare(thd)) {
       /* The prepare phase of XA transaction two phase logging. */
-      int err= 0;
-      bool one_phase= get_xa_opt(thd) == XA_ONE_PHASE;
+      int err = 0;
+      bool one_phase = get_xa_opt(thd) == XA_ONE_PHASE;
 
       assert(thd->lex->sql_command != SQLCOM_XA_COMMIT || one_phase);
 
-      XID_STATE *xs= thd->get_transaction()->xid_state();
+      XID_STATE *xs = thd->get_transaction()->xid_state();
       XA_prepare_log_event end_evt(thd, xs->get_xid(), one_phase);
 
       assert(skip_commit);
 
-      err= cache_mngr->trx_cache.finalize(thd, &end_evt, xs);
+      err = cache_mngr->trx_cache.finalize(thd, &end_evt, xs);
       if (err ||
           (DBUG_EVALUATE_IF("simulate_xa_prepare_failure_in_cache_finalize",
-                            true, false)))
-      {
+                            true, false))) {
         DBUG_RETURN(RESULT_ABORTED);
       }
-    }
-    else if (real_trans && xid && trn_ctx->rw_ha_count(trx_scope) > 1 &&
-             !trn_ctx->no_2pc(trx_scope))
-    {
+    } else if (real_trans && xid && trn_ctx->rw_ha_count(trx_scope) > 1 &&
+               !trn_ctx->no_2pc(trx_scope)) {
       Xid_log_event end_evt(thd, xid);
       if (cache_mngr->trx_cache.finalize(thd, &end_evt))
         DBUG_RETURN(RESULT_ABORTED);
-    }
-    else
-    {
-      Query_log_event end_evt(thd, STRING_WITH_LEN("COMMIT"),
-                              true, FALSE, TRUE, 0, TRUE);
+    } else {
+      Query_log_event end_evt(thd, STRING_WITH_LEN("COMMIT"), true, FALSE, TRUE,
+                              0, TRUE);
       if (cache_mngr->trx_cache.finalize(thd, &end_evt))
         DBUG_RETURN(RESULT_ABORTED);
     }
-    trx_stuff_logged= true;
+    trx_stuff_logged = true;
   }
 
   /*
@@ -8825,21 +8811,18 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
     to the binary log so we have to report this as a "bad" failure
     (failed to commit, but logged something).
   */
-  if (stmt_stuff_logged || trx_stuff_logged)
-  {
-    if (RUN_HOOK(transaction,
-                 before_commit,
-                 (thd, all,
-                  thd_get_cache_mngr(thd)->get_binlog_cache_log(true),
+  if (stmt_stuff_logged || trx_stuff_logged) {
+    if (RUN_HOOK(transaction, before_commit,
+                 (thd, all, thd_get_cache_mngr(thd)->get_binlog_cache_log(true),
                   thd_get_cache_mngr(thd)->get_binlog_cache_log(false),
                   max<my_off_t>(max_binlog_cache_size,
                                 max_binlog_stmt_cache_size))) ||
-        DBUG_EVALUATE_IF("simulate_failure_in_before_commit_hook", true, false))
-    {
+        DBUG_EVALUATE_IF("simulate_failure_in_before_commit_hook", true,
+                         false)) {
       ha_rollback_low(thd, all);
       gtid_state->update_on_rollback(thd);
       thd_get_cache_mngr(thd)->reset();
-      //Reset the thread OK status before changing the outcome.
+      // Reset the thread OK status before changing the outcome.
       if (thd->get_stmt_da()->is_ok())
         thd->get_stmt_da()->reset_diagnostics_area();
       my_error(ER_RUN_HOOK_ERROR, MYF(0), "before_commit");
@@ -8849,9 +8832,11 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
       Check whether the transaction should commit or abort given the
       plugin feedback.
     */
-    if (thd->get_transaction()->get_rpl_transaction_ctx()->is_transaction_rollback() ||
-        (DBUG_EVALUATE_IF("simulate_transaction_rollback_request", true, false)))
-    {
+    if (thd->get_transaction()
+            ->get_rpl_transaction_ctx()
+            ->is_transaction_rollback() ||
+        (DBUG_EVALUATE_IF("simulate_transaction_rollback_request", true,
+                          false))) {
       ha_rollback_low(thd, all);
       gtid_state->update_on_rollback(thd);
       thd_get_cache_mngr(thd)->reset();
@@ -8870,16 +8855,13 @@ TC_LOG::enum_result MYSQL_BIN_LOG::commit(THD *thd, bool all)
     */
     if (is_loggable_xa_prepare(thd))
       thd->get_transaction()->xid_state()->set_binlogged();
-  }
-  else if (!skip_commit)
-  {
+  } else if (!skip_commit) {
     if (ha_commit_low(thd, all))
       DBUG_RETURN(RESULT_INCONSISTENT);
   }
 
   DBUG_RETURN(RESULT_SUCCESS);
 }
-
 
 /**
    Flush caches for session.
@@ -9481,7 +9463,7 @@ void MYSQL_BIN_LOG::handle_binlog_flush_or_sync_error(THD *thd,
   The procedure is:
 
   1. Queue ourselves for flushing.
-  2. Grab the log lock, which might result is blocking if the mutex is
+  2. Grab(抓取，利用) the log lock, which might result is blocking if the mutex is
      already held by another thread.
   3. If we were not committed while waiting for the lock
      1. Fetch the queue
@@ -9513,12 +9495,12 @@ void MYSQL_BIN_LOG::handle_binlog_flush_or_sync_error(THD *thd,
                be skipped (it is handled by the caller somehow) and @c
                false otherwise (the normal case).
  */
-int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
-{
+// 顺序提交
+int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit) {
   DBUG_ENTER("MYSQL_BIN_LOG::ordered_commit");
-  int flush_error= 0, sync_error= 0;
-  my_off_t total_bytes= 0;
-  bool do_rotate= false;
+  int flush_error = 0, sync_error = 0;
+  my_off_t total_bytes = 0;
+  bool do_rotate = false;
 
   /*
     These values are used while flushing a transaction, so clear
@@ -9533,14 +9515,14 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
     - Everything in the transaction structure is reset when calling
       ha_commit_low since that calls Transaction_ctx::cleanup.
   */
-  thd->get_transaction()->m_flags.pending= true;
-  thd->commit_error= THD::CE_NONE;
-  thd->next_to_commit= NULL;
-  thd->durability_property= HA_IGNORE_DURABILITY;
-  thd->get_transaction()->m_flags.real_commit= all;
-  thd->get_transaction()->m_flags.xid_written= false;
-  thd->get_transaction()->m_flags.commit_low= !skip_commit;
-  thd->get_transaction()->m_flags.run_hooks= !skip_commit;
+  thd->get_transaction()->m_flags.pending = true;
+  thd->commit_error = THD::CE_NONE;
+  thd->next_to_commit = NULL;
+  thd->durability_property = HA_IGNORE_DURABILITY;
+  thd->get_transaction()->m_flags.real_commit = all;
+  thd->get_transaction()->m_flags.xid_written = false;
+  thd->get_transaction()->m_flags.commit_low = !skip_commit;
+  thd->get_transaction()->m_flags.run_hooks = !skip_commit;
 #ifndef NDEBUG
   /*
      The group commit Leader may have to wait for follower whose transaction
@@ -9550,7 +9532,7 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
      execute any thread-specific write access code in this method, which is
      the case as of current.
   */
-  thd->get_transaction()->m_flags.ready_preempt= 0;
+  thd->get_transaction()->m_flags.ready_preempt = 0;
 #endif
 
   DBUG_PRINT("enter", ("flags.pending: %s, commit_error: %d, thread_id: %u",
@@ -9569,37 +9551,32 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
   */
 
 #ifdef HAVE_REPLICATION
-  if (has_commit_order_manager(thd))
-  {
-    Slave_worker *worker= dynamic_cast<Slave_worker *>(thd->rli_slave);
-    Commit_order_manager *mngr= worker->get_commit_order_manager();
+  if (has_commit_order_manager(thd)) {
+    Slave_worker *worker = dynamic_cast<Slave_worker *>(thd->rli_slave);
+    Commit_order_manager *mngr = worker->get_commit_order_manager();
 
-    if (mngr->wait_for_its_turn(worker, all))
-    {
-      thd->commit_error= THD::CE_COMMIT_ERROR;
+    if (mngr->wait_for_its_turn(worker, all)) {
+      thd->commit_error = THD::CE_COMMIT_ERROR;
       DBUG_RETURN(thd->commit_error);
     }
 
     if (change_stage(thd, Stage_manager::FLUSH_STAGE, thd, NULL, &LOCK_log))
       DBUG_RETURN(finish_commit(thd));
-  }
-  else
+  } else
 #endif
-  if (change_stage(thd, Stage_manager::FLUSH_STAGE, thd, NULL, &LOCK_log))
-  {
-    DBUG_PRINT("return", ("Thread ID: %u, commit_error: %d",
-                          thd->thread_id(), thd->commit_error));
+      if (change_stage(thd, Stage_manager::FLUSH_STAGE, thd, NULL, &LOCK_log)) {
+    DBUG_PRINT("return", ("Thread ID: %u, commit_error: %d", thd->thread_id(),
+                          thd->commit_error));
     DBUG_RETURN(finish_commit(thd));
   }
 
-  THD *wait_queue= NULL, *final_queue= NULL;
-  mysql_mutex_t *leave_mutex_before_commit_stage= NULL;
-  my_off_t flush_end_pos= 0;
+  THD *wait_queue = NULL, *final_queue = NULL;
+  mysql_mutex_t *leave_mutex_before_commit_stage = NULL;
+  my_off_t flush_end_pos = 0;
   bool update_binlog_end_pos_after_sync;
-  if (unlikely(!is_open()))
-  {
-    final_queue= stage_manager.fetch_queue_for(Stage_manager::FLUSH_STAGE);
-    leave_mutex_before_commit_stage= &LOCK_log;
+  if (unlikely(!is_open())) {
+    final_queue = stage_manager.fetch_queue_for(Stage_manager::FLUSH_STAGE);
+    leave_mutex_before_commit_stage = &LOCK_log;
     /*
       binary log is closed, flush stage and sync stage should be
       ignored. Binlog cache should be cleared, but instead of doing
@@ -9609,14 +9586,15 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
     goto commit_stage;
   }
   DEBUG_SYNC(thd, "waiting_in_the_middle_of_flush_stage");
-  flush_error= process_flush_stage_queue(&total_bytes, &do_rotate,
-                                                 &wait_queue);
+  // BLGC-flush 阶段
+  flush_error =
+      process_flush_stage_queue(&total_bytes, &do_rotate, &wait_queue);
 
   if (flush_error == 0 && total_bytes > 0)
-    flush_error= flush_cache_to_file(&flush_end_pos);
+    flush_error = flush_cache_to_file(&flush_end_pos);
   DBUG_EXECUTE_IF("crash_after_flush_binlog", DBUG_SUICIDE(););
 
-  update_binlog_end_pos_after_sync= (get_sync_period() == 1);
+  update_binlog_end_pos_after_sync = (get_sync_period() == 1);
 
   /*
     If the flush finished successfully, we can call the after_flush
@@ -9624,15 +9602,13 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
     executed before the before/after_send_hooks on the dump thread
     preventing race conditions among these plug-ins.
   */
-  if (flush_error == 0)
-  {
-    const char *file_name_ptr= log_file_name + dirname_length(log_file_name);
+  if (flush_error == 0) {
+    const char *file_name_ptr = log_file_name + dirname_length(log_file_name);
     assert(flush_end_pos != 0);
     if (RUN_HOOK(binlog_storage, after_flush,
-                 (thd, file_name_ptr, flush_end_pos)))
-    {
+                 (thd, file_name_ptr, flush_end_pos))) {
       sql_print_error("Failed to run 'after_flush' hooks");
-      flush_error= ER_ERROR_ON_WRITE;
+      flush_error = ER_ERROR_ON_WRITE;
     }
 
     if (!update_binlog_end_pos_after_sync)
@@ -9640,14 +9616,15 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
     DBUG_EXECUTE_IF("crash_commit_after_log", DBUG_SUICIDE(););
   }
 
-  if (flush_error)
-  {
+  if (flush_error) {
     /*
       Handle flush error (if any) after leader finishes it's flush stage.
     */
-    handle_binlog_flush_or_sync_error(thd, false /* need_lock_log */,
-              (thd->commit_error == THD::CE_FLUSH_GNO_EXHAUSTED_ERROR)
-              ? ER(ER_GNO_EXHAUSTED) : NULL);
+    handle_binlog_flush_or_sync_error(
+        thd, false /* need_lock_log */,
+        (thd->commit_error == THD::CE_FLUSH_GNO_EXHAUSTED_ERROR)
+            ? ER(ER_GNO_EXHAUSTED)
+            : NULL);
   }
 
   DEBUG_SYNC(thd, "bgc_after_flush_stage_before_sync_stage");
@@ -9656,10 +9633,10 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
     Stage #2: Syncing binary log file to disk
   */
 
-  if (change_stage(thd, Stage_manager::SYNC_STAGE, wait_queue, &LOCK_log, &LOCK_sync))
-  {
-    DBUG_PRINT("return", ("Thread ID: %u, commit_error: %d",
-                          thd->thread_id(), thd->commit_error));
+  if (change_stage(thd, Stage_manager::SYNC_STAGE, wait_queue, &LOCK_log,
+                   &LOCK_sync)) {
+    DBUG_PRINT("return", ("Thread ID: %u, commit_error: %d", thd->thread_id(),
+                          thd->commit_error));
     DBUG_RETURN(finish_commit(thd));
   }
 
@@ -9672,28 +9649,25 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
     for every group just like how it is done when sync_binlog= 1.
   */
   if (!flush_error && (sync_counter + 1 >= get_sync_period()))
-    stage_manager.wait_count_or_timeout(opt_binlog_group_commit_sync_no_delay_count,
-                                        opt_binlog_group_commit_sync_delay,
-                                        Stage_manager::SYNC_STAGE);
+    stage_manager.wait_count_or_timeout(
+        opt_binlog_group_commit_sync_no_delay_count,
+        opt_binlog_group_commit_sync_delay, Stage_manager::SYNC_STAGE);
 
-  final_queue= stage_manager.fetch_queue_for(Stage_manager::SYNC_STAGE);
+  final_queue = stage_manager.fetch_queue_for(Stage_manager::SYNC_STAGE);
 
-  if (flush_error == 0 && total_bytes > 0)
-  {
+  if (flush_error == 0 && total_bytes > 0) {
     DEBUG_SYNC(thd, "before_sync_binlog_file");
-    std::pair<bool, bool> result= sync_binlog_file(false);
-    sync_error= result.first;
+    std::pair<bool, bool> result = sync_binlog_file(false);
+    sync_error = result.first;
   }
 
-  if (update_binlog_end_pos_after_sync)
-  {
-    THD *tmp_thd= final_queue;
-    const char *binlog_file= NULL;
-    my_off_t pos= 0;
+  if (update_binlog_end_pos_after_sync) {
+    THD *tmp_thd = final_queue;
+    const char *binlog_file = NULL;
+    my_off_t pos = 0;
     while (tmp_thd->next_to_commit != NULL)
-      tmp_thd= tmp_thd->next_to_commit;
-    if (flush_error == 0 && sync_error == 0)
-    {
+      tmp_thd = tmp_thd->next_to_commit;
+    if (flush_error == 0 && sync_error == 0) {
       tmp_thd->get_trans_fixed_pos(&binlog_file, &pos);
       update_binlog_end_pos(binlog_file, pos);
     }
@@ -9701,7 +9675,7 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
 
   DEBUG_SYNC(thd, "bgc_after_sync_stage_before_commit_stage");
 
-  leave_mutex_before_commit_stage= &LOCK_sync;
+  leave_mutex_before_commit_stage = &LOCK_sync;
   /*
     Stage #3: Commit all transactions in order.
 
@@ -9721,22 +9695,20 @@ int MYSQL_BIN_LOG::ordered_commit(THD *thd, bool all, bool skip_commit)
   */
 commit_stage:
   if (opt_binlog_order_commits &&
-      (sync_error == 0 || binlog_error_action != ABORT_SERVER))
-  {
-    if (change_stage(thd, Stage_manager::COMMIT_STAGE,
-                     final_queue, leave_mutex_before_commit_stage,
-                     &LOCK_commit))
-    {
-      DBUG_PRINT("return", ("Thread ID: %u, commit_error: %d",
-                            thd->thread_id(), thd->commit_error));
+      (sync_error == 0 || binlog_error_action != ABORT_SERVER)) {
+    if (change_stage(thd, Stage_manager::COMMIT_STAGE, final_queue,
+                     leave_mutex_before_commit_stage, &LOCK_commit)) {
+      DBUG_PRINT("return", ("Thread ID: %u, commit_error: %d", thd->thread_id(),
+                            thd->commit_error));
       DBUG_RETURN(finish_commit(thd));
     }
-    THD *commit_queue= stage_manager.fetch_queue_for(Stage_manager::COMMIT_STAGE);
+    THD *commit_queue =
+        stage_manager.fetch_queue_for(Stage_manager::COMMIT_STAGE);
     DBUG_EXECUTE_IF("semi_sync_3-way_deadlock",
                     DEBUG_SYNC(thd, "before_process_commit_stage_queue"););
 
     if (flush_error == 0 && sync_error == 0)
-      sync_error= call_after_sync_hook(commit_queue);
+      sync_error = call_after_sync_hook(commit_queue);
 
     /*
       process_commit_stage_queue will call update_on_commit or
@@ -9760,14 +9732,12 @@ commit_stage:
       3-way deadlock among user thread, rotate thread and dump thread.
     */
     process_after_commit_stage_queue(thd, commit_queue);
-    final_queue= commit_queue;
-  }
-  else
-  {
+    final_queue = commit_queue;
+  } else {
     if (leave_mutex_before_commit_stage)
       mysql_mutex_unlock(leave_mutex_before_commit_stage);
     if (flush_error == 0 && sync_error == 0)
-      sync_error= call_after_sync_hook(final_queue);
+      sync_error = call_after_sync_hook(final_queue);
   }
 
   /*
@@ -9784,7 +9754,7 @@ commit_stage:
     deadlock. We don't need the return value here since it is in
     thd->commit_error, which is returned below.
   */
-  (void) finish_commit(thd);
+  (void)finish_commit(thd);
 
   /*
     If we need to rotate, we do it without commit error.
@@ -9792,8 +9762,7 @@ commit_stage:
    */
   if (DBUG_EVALUATE_IF("force_rotate", 1, 0) ||
       (do_rotate && thd->commit_error == THD::CE_NONE &&
-       !is_rotating_caused_by_incident))
-  {
+       !is_rotating_caused_by_incident)) {
     /*
       Do not force the rotate as several consecutive groups may
       request unnecessary rotations.
@@ -9803,17 +9772,17 @@ commit_stage:
     */
 
     DEBUG_SYNC(thd, "ready_to_do_rotation");
-    bool check_purge= false;
+    bool check_purge = false;
     mysql_mutex_lock(&LOCK_log);
     /*
       If rotate fails then depends on binlog_error_action variable
       appropriate action will be taken inside rotate call.
     */
-    int error= rotate(false, &check_purge);
+    int error = rotate(false, &check_purge);
     mysql_mutex_unlock(&LOCK_log);
 
     if (error)
-      thd->commit_error= THD::CE_COMMIT_ERROR;
+      thd->commit_error = THD::CE_COMMIT_ERROR;
     else if (check_purge)
       purge();
   }
@@ -9823,7 +9792,6 @@ commit_stage:
   */
   DBUG_RETURN(thd->commit_error == THD::CE_COMMIT_ERROR);
 }
-
 
 /**
   MYSQLD server recovers from last crashed binlog.
