@@ -41,3 +41,6 @@ wei@Wang:~$ make -v
 
 ### Boost库
 - boost_1_59_0
+
+### OS
+Ubuntu 20.04
