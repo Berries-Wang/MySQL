@@ -1,0 +1,2 @@
+# MySQL 常见SQL整理
+0. INSERT ... ON DUPLICATE KEY UPDATE Statement
