@@ -1,0 +1,19 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "mysqld",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/001.SOURCE_CODE/build/001.build-output/sql/mysqld",
+            "args": [
+                "--defaults-file=/home/wei/workspace/SOURCE_CODE/MySQL/001.SOURCE_CODE/build/000.build-scripts/sys/my.cnf",
+                "--user=root",
+                "--lc-messages-dir=/home/wei/workspace/SOURCE_CODE/MySQL/001.SOURCE_CODE/build/001.build-output/sql/share"
+            ]
+        }
+    ]
+}
