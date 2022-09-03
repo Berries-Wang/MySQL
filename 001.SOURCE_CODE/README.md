@@ -1,3 +1,23 @@
+- [MySQL编译调试](#mysql编译调试)
+  - [步骤](#步骤)
+  - [编译环境(软件)](#编译环境软件)
+    - [gcc 、 g++](#gcc--g)
+    - [make](#make)
+    - [Boost库](#boost库)
+    - [OS](#os)
+    - [IDE && 插件](#ide--插件)
+      - [IDE](#ide)
+      - [插件](#插件)
+  - [编译环境创建步骤(源码调试环境搭建)](#编译环境创建步骤源码调试环境搭建)
+    - [调试环境搭建](#调试环境搭建)
+      - [1. 执行编译脚本: 000.MySQL-Build.sh](#1-执行编译脚本-000mysql-buildsh)
+        - [输出日志(部分)](#输出日志部分)
+      - [2. Debug配置](#2-debug配置)
+        - [调试开始](#调试开始)
+          - [1. 启动调试](#1-启动调试)
+          - [2. 调试SQL执行](#2-调试sql执行)
+
+
 # MySQL编译调试
 ## 步骤
 1. 在一个新建的空的文件夹A下执行文件: 001.MySQL源码/mysql-server-5.7/BUILD/compile-pentium-debug-max-no-ndb  是为了生成makefile文件，再在Eclipse中使用这些文件来调试
@@ -174,7 +194,8 @@ Ubuntu 20.04
 
 ```
 
-&nbsp;&nbsp; 关闭由脚本启动的MySQL(<font color="red">此时,数据库用户名密码以及基础数据库信息初始化到001.SOURCE_CODE/build/000.build-scripts/data 目录下，可以开始调试了</font>)
+&nbsp;&nbsp; 关闭由脚本启动的MySQL
+> (<font color="red">此时,数据库用户名密码以及基础数据库信息初始化到001.SOURCE_CODE/build/000.build-scripts/data 目录下，可以开始调试了</font>),后续调试时，使用客户端登录时使用此时设置的密码。
 
 #### 2. Debug配置
 &nbsp;&nbsp;如文件: .vscode/launch.json ：
@@ -210,3 +231,4 @@ Ubuntu 20.04
 <img src="./build/docs/pics/2022-09-04_01-08-debug-server-sql-exec.png"/>
 
 + 如上，密码就是编译时启动设置的.
++ 客户端是由编译产生的。
