@@ -63,6 +63,17 @@ wei@Wang:~$ make -v
 ### Boost库
 - boost_1_59_0
 
+### openSSL
+```txt
+   sudo apt-get install openssl
+   sudo apt-get install libssl-dev
+```
+
+### bison
+```txt
+  sudo apt-get install bison
+```
+
 ### OS
 Ubuntu 20.04
 
