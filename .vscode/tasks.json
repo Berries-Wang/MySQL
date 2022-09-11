@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "MySQL-Debug-Shutdown",
+            "label": "MySQL-5.7-Debug-Shutdown",
             "type": "shell",
             "command": "/home/wei/workspace/SOURCE_CODE/MySQL/001.SOURCE_CODE/build/000.build-scripts/001.MySQL-Shutdown.sh",
             "group": "test",

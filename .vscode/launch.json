@@ -5,16 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "mysqld",
+            "name": "mysqld-5.7-debug",
             "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/001.SOURCE_CODE/build/001.build-output/sql/mysqld",
+            "program": "${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/mysqld",
             "args": [
-                "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/build/000.build-scripts/sys/my.cnf",
+                "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/sys/my.cnf",
                 "--user=root",
-                "--lc-messages-dir=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/build/001.build-output/sql/share"
+                "--lc-messages-dir=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share"
             ],
-            "postDebugTask": "MySQL-Debug-Shutdown"
+            "postDebugTask": "MySQL-5.7-Debug-Shutdown"
         }
     ]
 }
