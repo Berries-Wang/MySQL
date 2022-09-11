@@ -192,24 +192,18 @@ Ubuntu 20.04
 &nbsp;&nbsp;如文件: .vscode/launch.json ：
 ```json
     {
-       // 使用 IntelliSense 了解相关属性。 
-       // 悬停以查看现有属性的描述。
-       // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-       "version": "0.2.0",
-       "configurations": [
-           {
-               "name": "mysqld",
-               "type": "lldb",
-               "request": "launch",
-               "program": "${workspaceFolder}/001.SOURCE_CODE/build/001.build-output/sql/mysqld",
-               "args": [
-                   "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/sys/my.cnf",
-                   "--user=root",
-                   "--lc-messages-dir=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share"
-               ]
-           }
-       ]
-    }
+            "name": "mysqld-5.7-debug",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/mysqld",
+            "args": [
+                "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/sys/my.cnf",
+                "--user=root",
+                "--lc-messages-dir=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share",
+                "--debug=d,info:n:N:F:i:L:o" // 打印MySQL日志到控制台,见001.SOURCE_CODE/002.docs/001.debug-docs
+            ],
+            "postDebugTask": "MySQL-5.7-Debug-Shutdown"
+        }
 ```
 
 &nbsp;&nbsp;如上配置，使用CodeLLDB进行调试

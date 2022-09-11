@@ -1,0 +1,46 @@
+/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/001.build-output/bin/mysqld, Version: 8.0.30-debug (Source distribution). started with:
+Tcp port: 3309  Unix socket: /tmp/mysql.sock
+Time                 Id Command    Argument
+2022-09-12T01:10:06.610213+08:00	    8 Query	select * from t2
+2022-09-12T01:11:14.208870+08:00	    8 Query	select * from t2
+2022-09-12T01:11:15.598128+08:00	    8 Query	select * from t2
+2022-09-12T01:11:16.145298+08:00	    8 Query	select * from t2
+2022-09-12T01:11:16.564103+08:00	    8 Query	select * from t2
+2022-09-12T01:11:16.928732+08:00	    8 Query	select * from t2
+2022-09-12T01:11:17.294651+08:00	    8 Query	select * from t2
+2022-09-12T01:11:17.620795+08:00	    8 Query	select * from t2
+2022-09-12T01:11:17.944564+08:00	    8 Query	select * from t2
+2022-09-12T01:11:18.260793+08:00	    8 Query	select * from t2
+2022-09-12T01:11:18.572699+08:00	    8 Query	select * from t2
+2022-09-12T01:11:18.884922+08:00	    8 Query	select * from t2
+2022-09-12T01:11:19.208739+08:00	    8 Query	select * from t2
+2022-09-12T01:11:19.516615+08:00	    8 Query	select * from t2
+2022-09-12T01:11:19.836658+08:00	    8 Query	select * from t2
+2022-09-12T01:11:20.148569+08:00	    8 Query	select * from t2
+2022-09-12T01:11:20.483074+08:00	    8 Query	select * from t2
+2022-09-12T01:11:22.281975+08:00	    8 Query	select * from t2
+2022-09-12T01:11:22.768547+08:00	    8 Query	select * from t2
+2022-09-12T01:11:23.117145+08:00	    8 Query	select * from t2
+2022-09-12T01:11:23.420410+08:00	    8 Query	select * from t2
+2022-09-12T01:11:23.704498+08:00	    8 Query	select * from t2
+2022-09-12T01:11:23.976590+08:00	    8 Query	select * from t2
+2022-09-12T01:11:24.288807+08:00	    8 Query	select * from t2
+2022-09-12T01:11:24.628524+08:00	    8 Query	select * from t2
+2022-09-12T01:11:24.968727+08:00	    8 Query	select * from t2
+2022-09-12T01:11:25.325050+08:00	    8 Query	select * from t2
+2022-09-12T01:11:25.632772+08:00	    8 Query	select * from t2
+2022-09-12T01:11:25.968581+08:00	    8 Query	select * from t2
+2022-09-12T01:11:26.293148+08:00	    8 Query	select * from t2
+2022-09-12T01:11:26.627084+08:00	    8 Query	select * from t2
+2022-09-12T01:11:26.976677+08:00	    8 Query	select * from t2
+2022-09-12T01:11:27.349006+08:00	    8 Query	select * from t2
+2022-09-12T01:11:27.680689+08:00	    8 Query	select * from t2
+2022-09-12T01:11:28.032642+08:00	    8 Query	select * from t2
+2022-09-12T01:11:28.360566+08:00	    8 Query	select * from t2
+2022-09-12T01:11:28.700629+08:00	    8 Query	select * from t2
+2022-09-12T01:12:03.441076+08:00	    8 Query	alter table t2 add column age int
+2022-09-12T01:17:56.119723+08:00	    8 Query	alter table t2 add column age int
+2022-09-12T01:17:58.807785+08:00	    8 Query	select * from t2
+2022-09-12T01:17:59.520905+08:00	    8 Query	select * from t2
+2022-09-12T01:17:59.995803+08:00	    8 Query	select * from t2
+2022-09-12T01:18:00.531673+08:00	    8 Query	select * from t2

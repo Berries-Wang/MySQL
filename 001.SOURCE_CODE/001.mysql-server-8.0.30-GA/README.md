@@ -113,9 +113,9 @@
             "program": "${workspaceFolder}/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/001.build-output/bin/mysqld",
             "args": [
                 "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/sys/my.cnf",
-                "--user=root"
-            ],
-            "postDebugTask": "MySQL-5.7-Debug-Shutdown"
+                "--user=root",
+                "--debug=d,info:n:N:F:i:L:o" // 打印MySQL日志到控制台,见001.SOURCE_CODE/002.docs/001.debug-docs
+            ]
         }
 ```
 
