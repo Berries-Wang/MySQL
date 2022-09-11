@@ -19,7 +19,11 @@ cd ${CONFDIR}/../001.build-output
 echo '当前目录:' `pwd`
 
 # 生成makefile文件
-cmake ../../mysql-8.0.30-server
+cmake  \
+     -DCMAKE_BUILD_TYPE=Debug \
+     -DBOOST_INCLUDE_DIR=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/libs-output/boost_1_77_0_output/include \
+     -DBOOST_ROOT=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/libs-output/boost_1_77_0_output \
+     -DBOOST_NO_SYSTEM_PATHS=ON ../../mysql-8.0.30-server 
 
 # 编译
 make
@@ -27,11 +31,11 @@ make
 if [ ! -d "${CONFDIR}/../000.build-scripts/data" ];then
   echo '000.build-scripts/data 文件夹不存在,创建'
   mkdir ${CONFDIR}/data
-  # 初始化(data文件夹不存在才需要初始化)
-  #./sql/mysqld --defaults-file=${CONFDIR}/sys/my.cnf --user=root --initialize
+  # 初始化(data文件夹不存在才需要初始化)，之所以初始化并启动，是为了创建一个用户，为了后面的调试做准备.
+  ./bin/mysqld --defaults-file=${CONFDIR}/sys/my.cnf --user=root --initialize
 else
   echo "文件夹已经存在"
 fi
 
 # 启动服务
-# ./sql/mysqld --defaults-file=${CONFDIR}/sys/my.cnf
+./bin/mysqld --defaults-file=${CONFDIR}/sys/my.cnf

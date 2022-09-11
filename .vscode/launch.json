@@ -15,6 +15,16 @@
                 "--lc-messages-dir=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share"
             ],
             "postDebugTask": "MySQL-5.7-Debug-Shutdown"
+        },
+        {
+            "name": "mysqld-8.0-debug",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/001.build-output/bin/mysqld",
+            "args": [
+                "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/sys/my.cnf",
+                "--user=root"
+            ]
         }
     ]
 }
