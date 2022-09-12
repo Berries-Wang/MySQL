@@ -18,9 +18,9 @@ cd ${CONFDIR}/../001.build-output
 # 输出当前目录
 echo '当前目录:' `pwd`
 
-# 生成makefile文件
+#run cmake to configure the build:
 cmake  \
-     -DCMAKE_BUILD_TYPE=Debug \
+     -DCMAKE_BUILD_TYPE=Debug `# Debug Configuration`\
      -DBOOST_INCLUDE_DIR=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/libs-output/boost_1_77_0_output/include \
      -DBOOST_ROOT=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/libs-output/boost_1_77_0_output \
      -DBOOST_NO_SYSTEM_PATHS=ON ../../mysql-8.0.30-server 

@@ -21,6 +21,12 @@ echo '当前目录:' `pwd`
 # 生成makefile文件
 ./../../mysql-server-5.7/BUILD/compile-pentium-debug-max-no-ndb
 
+# run cmake to configure the build
+# 参考：001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/000.MySQL-Build.sh,boost默认安装到/usr/bin，因此这里不用额外指定.
+cmake  \
+     -DCMAKE_BUILD_TYPE=Debug `# Debug Configuration`\
+     -DWITH_VALGRIND=1  ../../mysql-server-5.7
+
 # 编译
 make
 # 创建debug时的data目录
