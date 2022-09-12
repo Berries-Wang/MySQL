@@ -200,7 +200,7 @@ Ubuntu 20.04
                 "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/sys/my.cnf",
                 "--user=root",
                 "--lc-messages-dir=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share",
-                "--debug=d,info:n:N:F:i:L:o" // 打印MySQL日志到控制台,见001.SOURCE_CODE/002.docs/001.debug-docs
+                "--debug=d,info,error,query,general,where:O,/tmp/mysqld.trace" // 打印MySQL日志到控制台,见001.SOURCE_CODE/002.docs/001.debug-docs
             ],
             "postDebugTask": "MySQL-5.7-Debug-Shutdown"
         }
