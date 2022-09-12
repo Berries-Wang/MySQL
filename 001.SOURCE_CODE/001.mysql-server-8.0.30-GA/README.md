@@ -32,7 +32,7 @@
 - 其他编译环境&&IDE参考: [001.SOURCE_CODE/000.mysql-server-5.7/README.md](../000.mysql-server-5.7/README.md)
 ---
 ## 编译步骤
-&nbsp;&nbsp;执行编译脚本：  001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/000.MySQL-Build.sh 即可
+&nbsp;&nbsp;进入脚本所在文件夹，执行编译脚本：  001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/000.MySQL-Build.sh 即可
 > 如果遇到编译依赖没有安装，可以根据输出日志进行安装
 
 ---

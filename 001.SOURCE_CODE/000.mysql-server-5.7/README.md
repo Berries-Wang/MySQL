@@ -2,7 +2,7 @@
 ## 步骤
 1. 在一个新建的空的文件夹A下执行文件: 001.SOURCE_CODE/000.mysql-server-5.7/mysql-server-5.7/BUILD/compile-pentium-debug-max-no-ndb  是为了生成makefile文件，再在Eclipse中使用这些文件来调试
     - 注意，需要在一个新建的空的文件夹下执行，因为该步骤会在${PWD}下生成很多文件，需要将这些文件排除,不需要提交到远程仓库
-2. 在文件夹A下执行make
+2. 进入到脚本所在的文件夹，执行脚本即可
    > 参照编译脚本即可: 001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/000.MySQL-Build.sh
 
 ---
