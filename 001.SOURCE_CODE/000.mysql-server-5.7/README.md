@@ -29,8 +29,15 @@
       gcc version 4.7.4 (Ubuntu/Linaro 4.7.4-3ubuntu12) 
 ```
 
-### make
-```
+### cmake & make
+```txt
+wei@Wang:~$ cmake --version
+cmake version 3.16.3
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+
+---
+
 wei@Wang:~$ make -v
    GNU Make 4.2.1
    为 x86_64-pc-linux-gnu 编译
