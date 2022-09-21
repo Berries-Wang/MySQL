@@ -57,9 +57,22 @@
 
 
 ---
-## 索引失效的情况枚举
-1. 字段类型不同
-2. 在字段上使用了函数
+## 什么是三星索引
+&nbsp;&nbsp;三星索引是《Rrelational Database Index Design and the optimizers》 一书中提出来的：
+```txt
+   原文:
+   The index earns one star if it places relevant rows adjacent to each other, a second star if its rows are sorted in the order the query needs, and a final star if it contains all the columns needed for the query.
+
+   > 如果索引的相关行彼此相邻，则获得1颗星;如果索引的行按查询所需的顺序排序，则获得第二颗星;如果索引包含查询所需的所有列，则获得最后一颗星。
+```
+
+&nbsp;&nbsp;什么是三星索引？ 衡量一个索引是否达到最佳表现的三个维度
+- 一星： 与查询相关的索引行时相邻的，也就是where条件后面的等值谓词可以匹配索引列顺序
+  + where后面匹配条件，可以匹配联合索引的多个列：意义在于索引列匹配字段越多，索引片越窄，最终扫描的数据行越小
+- 二星：索引行的顺序与查询语句需求一致，就是是order by 中的排列顺序和索引顺序是否一致
+  + 如果结果集采用现有顺序读取，则会避免一次排序。
+- 三星: 索引行中包含查询语句中所有的列
+  + 即避免根据聚集索引键回表查询,也就是避免了一次随机IO  
 
 ---
 ## 附录
