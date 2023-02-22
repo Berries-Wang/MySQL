@@ -35,3 +35,11 @@
 
     //=> 从java.sql.Connection的方法可以看出，事务的创建、提交、回滚其实都是通过java.sql.Connection来操作的，起其实也就是通过“连接”来操作的，从而得出："事务是属于连接的" 这一结论
    ```
+## Seata 中关键的类
+- io.seata.server.coordinator.DefaultCoordinator
+- io.seata.spring.annotation.GlobalTransactional
+- io.seata.spring.annotation.GlobalTransactionalInterceptor
+- io.seata.tm.api.TransactionalTemplate
+- io.seata.rm.datasource.DataSourceProxy
+- io.seata.rm.datasource.ConnectionProxy
+- io.seata.integration.dubbo.alibaba.AlibabaDubboTransactionPropagationFilter
