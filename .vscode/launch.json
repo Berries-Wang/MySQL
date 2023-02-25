@@ -13,7 +13,7 @@
                 "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/sys/my.cnf",
                 "--user=root",
                 "--lc-messages-dir=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share",
-                "--debug=d,info:n:N:F:i:L:o" // 打印MySQL日志到控制台,见001.SOURCE_CODE/002.docs/001.debug-docs
+                "--debug=d,info:n:N:F:i:L:o"
             ],
             "postDebugTask": "MySQL-5.7-Debug-Shutdown"
         },
@@ -25,7 +25,7 @@
             "args": [
                 "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/sys/my.cnf",
                 "--user=root",
-                "--debug=d,info:n:N:F:i:L:o" // 打印MySQL日志到控制台,见001.SOURCE_CODE/002.docs/001.debug-docs
+                "--debug=d,info:n:N:F:i:L:o"
             ]
         }
     ]

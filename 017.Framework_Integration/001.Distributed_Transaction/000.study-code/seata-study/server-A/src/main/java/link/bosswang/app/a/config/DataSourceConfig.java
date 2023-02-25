@@ -2,6 +2,7 @@ package link.bosswang.app.a.config;
 
 
 import com.alibaba.druid.pool.DruidDataSource;
+import io.seata.rm.datasource.DataSourceProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,6 +13,9 @@ import java.sql.SQLException;
 @Configuration
 public class DataSourceConfig {
 
+    /**
+     * 注意事项: 返回的数据源的类型
+     */
     @Bean
     public DataSource dataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
@@ -21,7 +25,7 @@ public class DataSourceConfig {
         druidDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         //加入监控功能
         druidDataSource.setFilters("stat,wall");
-        return druidDataSource;
+        return new DataSourceProxy(druidDataSource);
     }
 
     @Bean

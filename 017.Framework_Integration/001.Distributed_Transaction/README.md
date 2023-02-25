@@ -43,3 +43,7 @@
 - io.seata.rm.datasource.DataSourceProxy
 - io.seata.rm.datasource.ConnectionProxy
 - io.seata.integration.dubbo.alibaba.AlibabaDubboTransactionPropagationFilter
+
+
+## 学习环境搭建
+1. Nacos: NACOS 2.2.0
