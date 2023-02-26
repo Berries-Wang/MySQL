@@ -18,7 +18,7 @@
         <module>server-A</module>
         <module>server-B</module>
     </modules>
-    <!-- Spring Cloud与Spring Boot版本配对: https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E-->
+    <!-- Spring Cloud与Spring Boot版本配对: https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E  # 版本说明-->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -73,12 +73,6 @@
             <version>8.0.21</version>
         </dependency>
 
-        <!--seata-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
-
         <!--服务注册与发现-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -96,6 +90,7 @@
             <groupId>io.seata</groupId>
             <artifactId>seata-spring-boot-starter</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-seata</artifactId>

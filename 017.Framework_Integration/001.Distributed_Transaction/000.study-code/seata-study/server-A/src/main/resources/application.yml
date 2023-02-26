@@ -32,7 +32,6 @@ seata:
       group: "SEATA_GROUP"
       username: "nacos"
       password: "nacos"
-  enable-auto-data-source-proxy: true
   enabled: true
   tx-service-group: seata_stu_wei_wang
   service:

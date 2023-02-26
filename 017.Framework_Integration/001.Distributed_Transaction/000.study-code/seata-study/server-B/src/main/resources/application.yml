@@ -32,13 +32,11 @@ seata: # seata配置中心
       username: nacos
       password: nacos
       group: SEATA_GROUP
-  enable-auto-data-source-proxy: true
   enabled: true
   tx-service-group: seata_stu_wei_wang
   service:
     vgroupMapping:
       seata_stu_wei_wang: default
-
 
 
 

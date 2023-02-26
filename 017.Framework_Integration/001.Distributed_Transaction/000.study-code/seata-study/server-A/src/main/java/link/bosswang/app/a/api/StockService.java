@@ -10,6 +10,5 @@ public interface StockService {
 
 
     @RequestMapping(value = "/reduce")
-    @ResponseBody
     public abstract String reduce(@RequestParam("itemId") String itemId);
 }
