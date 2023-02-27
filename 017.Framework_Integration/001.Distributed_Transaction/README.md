@@ -43,8 +43,3 @@
 - io.seata.rm.datasource.DataSourceProxy
 - io.seata.rm.datasource.ConnectionProxy
 - io.seata.integration.dubbo.alibaba.AlibabaDubboTransactionPropagationFilter
-
-
-## 学习环境搭建
-1. Nacos: NACOS 2.2.0
-   - 使用MySQL作为数据存储: spring.datasource.platform=mysql , 否则nacos-config.sh（script/config-center/nacos/nacos-config.sh）执行异常
