@@ -34,6 +34,7 @@ seata: # seata配置中心
       username: nacos
       password: nacos
       group: SEATA_GROUP
+      dataId: seataServer.properties
   enabled: true
   tx-service-group: seata_stu_wei_wang
   service:
