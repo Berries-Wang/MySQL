@@ -14,6 +14,8 @@ spring:
         tx-service-group: seata_stu_wei_wang # 与seata-server 保持一致
   application:
     name: seata-stu-a
+  jpa:
+    show-sql: true
 
 seata:
   registry:
@@ -37,3 +39,4 @@ seata:
   service:
     vgroupMapping:
       seata_stu_wei_wang: default
+  enable-auto-data-source-proxy: true

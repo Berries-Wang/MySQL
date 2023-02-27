@@ -6,6 +6,8 @@ import io.seata.rm.datasource.DataSourceProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -26,6 +28,13 @@ public class DataSourceConfig {
         //加入监控功能
         druidDataSource.setFilters("stat,wall");
         return new DataSourceProxy(druidDataSource);
+    }
+
+    @Bean
+    public PlatformTransactionManager configPlatformTransactionManager(DataSource dataSource){
+        DataSourceTransactionManager dtm = new DataSourceTransactionManager();
+        dtm.setDataSource(dataSource);
+        return dtm;
     }
 
     @Bean
