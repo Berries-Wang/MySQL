@@ -2,16 +2,13 @@ package link.bosswang.app.a.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import io.seata.spring.annotation.GlobalTransactional;
-import io.seata.tm.api.TransactionalTemplate;
 import link.bosswang.app.a.api.StockService;
 import link.bosswang.app.a.dao.OrderRepository;
 import link.bosswang.app.a.dao.endity.StuOrder;
 import link.bosswang.app.a.service.OrderService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
