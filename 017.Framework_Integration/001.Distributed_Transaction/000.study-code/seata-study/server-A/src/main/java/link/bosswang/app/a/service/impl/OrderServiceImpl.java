@@ -42,9 +42,7 @@ public class OrderServiceImpl implements OrderService {
         // 减库存
         String reduceRes = stockService.reduce("item_id_999");
         System.out.println("---> " + reduceRes + " , 耗时:" + (System.currentTimeMillis() - start));
-        printfOrderInfo();
-
-        printfOrderInfo();
+      //  printfOrderInfo();
 
         // int byZero = 1 / 0;
         HashMap<String, Object> rsp = new HashMap<>();
