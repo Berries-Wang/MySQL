@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
-
 @org.springframework.stereotype.Repository
 public interface OrderRepository extends Repository<StuOrder, Long> {
 
