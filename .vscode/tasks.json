@@ -5,7 +5,7 @@
         {
             "label": "MySQL-5.7-Debug-Shutdown",
             "type": "shell",
-            "command": "/home/wei/workspace/SOURCE_CODE/MySQL/001.SOURCE_CODE/build/000.build-scripts/001.MySQL-Shutdown.sh",
+            "command": "${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/001.MySQL-Shutdown.sh",
             "group": "test",
             "presentation": {
                 "reveal": "always",
