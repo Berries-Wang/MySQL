@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -41,6 +42,15 @@ public class CaseInsensitiveSummarizeDataMakeService {
         }
 
         System.out.println("数据创建完成");
+    }
+
+    public void makeGroupByDate() {
+        for (int i = 0; i < 20000; i++) {
+            Random random = new Random(System.currentTimeMillis());
+            long c1 = random.nextLong(), c2 = random.nextLong(), c3 = random.nextLong(), c4 = random.nextLong();
+            jdbcTemplate.update(String.format("INSERT INTO group_by_ab(c1,c2,c3,c4) VALUES(%d,%d,%d,%d);", (c1), (c2), (c3), (c4)));
+        }
+
     }
 
     @Transactional

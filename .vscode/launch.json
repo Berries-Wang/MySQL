@@ -10,9 +10,9 @@
             "request": "launch",
             "program": "${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/mysqld",
             "args": [
-                "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/sys/my.cnf",
+                "--defaults-file=${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/sys/my.cnf",
                 "--user=root",
-                "--lc-messages-dir=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share",
+                "--lc-messages-dir=${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share",
                 "--debug=d,info:n:N:F:i:L:o"
             ],
             "postDebugTask": "MySQL-5.7-Debug-Shutdown"
@@ -23,7 +23,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/001.build-output/bin/mysqld",
             "args": [
-                "--defaults-file=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/sys/my.cnf",
+                "--defaults-file=${workspaceFolder}/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/sys/my.cnf",
                 "--user=root",
                 "--debug=d,info:n:N:F:i:L:o"
             ]

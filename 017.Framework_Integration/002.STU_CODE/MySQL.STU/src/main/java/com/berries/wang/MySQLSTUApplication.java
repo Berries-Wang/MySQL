@@ -18,6 +18,7 @@ public class MySQLSTUApplication {
         System.out.println("=====> MySQLSTUApplication started");
 
         CaseInsensitiveSummarizeDataMakeService dataMakeService = applicationContext.getBean(CaseInsensitiveSummarizeDataMakeService.class);
-        dataMakeService.makeCaseInsensitiveSummarizeData();
+        // dataMakeService.makeCaseInsensitiveSummarizeData();
+        dataMakeService.makeGroupByDate();
     }
 }

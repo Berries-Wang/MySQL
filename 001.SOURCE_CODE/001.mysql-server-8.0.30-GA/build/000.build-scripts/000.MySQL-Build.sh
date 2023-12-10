@@ -21,8 +21,8 @@ echo '当前目录:' `pwd`
 #run cmake to configure the build:
 cmake  \
      -DCMAKE_BUILD_TYPE=Debug `# Debug Configuration`\
-     -DBOOST_INCLUDE_DIR=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/libs-output/boost_1_77_0_output/include \
-     -DBOOST_ROOT=/home/wei/WorkSpace/open_source/my-sql/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/libs-output/boost_1_77_0_output \
+     -DBOOST_INCLUDE_DIR=${CONFDIR}/../../libs/libs-output/boost_1_77_0_output/include \
+     -DBOOST_ROOT=${CONFDIR}/../../libs/libs-output/boost_1_77_0_output \
      -DBOOST_NO_SYSTEM_PATHS=ON ../../mysql-8.0.30-server 
 
 # 编译
