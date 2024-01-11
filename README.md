@@ -29,6 +29,10 @@
   > 在SQL语句前面加上EXPLAIN，就可以看到执行计划的信息,如果需要得到更详细的信息，可以使用：FORMAT=JSON
 
 ## 存储引擎
+<div align=center><img src="./pics/mysql-architecture-pluggable-storage-engine.png"/></div>
+
+> 可插拔存储引擎架构，> [MySQL存储引擎架构概述.md](./MySQL存储引擎架构概述.md)
+
 ### 1. InnoDB
 &nbsp;&nbsp;InnoDB只聚集在同一个页面中的记录，包含相邻键值的页面可能会相距甚远(通过双向链表访问)
   - 摘自《高性能MySQL 第三版》 P169
