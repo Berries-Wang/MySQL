@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "mysqld-5.7-debug",
+            "name": "mysqld-5.7-debug-3309",
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/mysqld",
@@ -16,6 +16,18 @@
                 "--debug=d,info:n:N:F:i:L:o"
             ],
             "postDebugTask": "MySQL-5.7-Debug-Shutdown"
+        },
+        {
+            "name": "mysqld-5.7-debug-3310",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/mysqld",
+            "args": [
+                "--defaults-file=${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/002.build-scripts-v2/sys/my.cnf",
+                "--user=root",
+                "--lc-messages-dir=${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share-v2",
+                "--debug=d,info:n:N:F:i:L:o"
+            ]
         },
         {
             "name": "mysqld-8.0-debug",
