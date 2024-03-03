@@ -11,6 +11,16 @@
                 "reveal": "always",
                 "panel": "new"
             }
+        },
+        {
+            "label": "MySQL-5.7-Debug-PreTask",
+            "type": "shell",
+            "command": "${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/002.MySQL-5.7-Debug-PreTask.sh",
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
         }
     ]
 }

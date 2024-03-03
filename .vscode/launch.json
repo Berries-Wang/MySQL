@@ -15,7 +15,8 @@
                 "--lc-messages-dir=${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share",
                 "--debug=d,info:n:N:F:i:L:o"
             ],
-            "postDebugTask": "MySQL-5.7-Debug-Shutdown"
+            "postDebugTask": "MySQL-5.7-Debug-Shutdown",
+            "preLaunchTask": "MySQL-5.7-Debug-PreTask"
         },
         {
             "name": "mysqld-5.7-debug-3310",
@@ -27,7 +28,9 @@
                 "--user=root",
                 "--lc-messages-dir=${workspaceFolder}/001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/sql/share-v2",
                 "--debug=d,info:n:N:F:i:L:o"
-            ]
+            ],
+            "postDebugTask": "MySQL-5.7-Debug-Shutdown",
+            "preLaunchTask": "MySQL-5.7-Debug-PreTask"
         },
         {
             "name": "mysqld-8.0-debug",
