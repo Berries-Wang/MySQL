@@ -4,6 +4,7 @@
 001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/libs-output/**
 001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/data/**
 001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/data/**
+001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/data_ano/**
 001.SOURCE_CODE/000.mysql-server-5.7/build/002.build-scripts-v2/data
 # maven ignore
 target/
