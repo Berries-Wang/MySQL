@@ -1,11 +1,15 @@
 .DS_Store
 001.SOURCE_CODE/000.mysql-server-5.7/build/001.build-output/**
+001.SOURCE_CODE/000.mysql-server-5.7/libs/libs-output
 001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/001.build-output/**
 001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/libs-output/**
 001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/data/**
 001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/data/**
 001.SOURCE_CODE/000.mysql-server-5.7/build/000.build-scripts/data_ano/**
 001.SOURCE_CODE/000.mysql-server-5.7/build/002.build-scripts-v2/data
+001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/boost_1_77_0.tar.gz
+001.SOURCE_CODE/000.mysql-server-5.7/libs/boost_1_59_0.tar.gz
+001.SOURCE_CODE/001.mysql-server-8.0.30-GA/libs/boost_1_77_0
 # maven ignore
 target/
 *.jar

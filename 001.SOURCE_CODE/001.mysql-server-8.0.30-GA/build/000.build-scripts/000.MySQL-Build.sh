@@ -18,12 +18,12 @@ cd ${CONFDIR}/../001.build-output
 # 输出当前目录
 echo '当前目录:' `pwd`
 
+# 全局搜索: WITH_BOOST (要解压后的) , 即可以不安装boost库，直接指定源码来编译MySQL
 #run cmake to configure the build:
 cmake  \
      -DCMAKE_BUILD_TYPE=Debug `# Debug Configuration`\
-     -DBOOST_INCLUDE_DIR=${CONFDIR}/../../libs/libs-output/boost_1_77_0_output/include \
-     -DBOOST_ROOT=${CONFDIR}/../../libs/libs-output/boost_1_77_0_output \
-     -DBOOST_NO_SYSTEM_PATHS=ON ../../mysql-8.0.30-server 
+     -DWITH_BOOST=${CONFDIR}/../../libs/boost_1_77_0 \
+     ../../mysql-8.0.30-server 
 
 # 编译
 make
