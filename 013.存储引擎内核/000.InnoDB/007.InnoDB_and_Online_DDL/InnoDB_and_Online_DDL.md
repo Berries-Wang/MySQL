@@ -7,5 +7,12 @@ The online DDL feature provides support for instant and in-place table alteratio
 
 Typically, you do not need to do anything special to enable online DDL. By default, MySQL performs the operation instantly or in place, as permitted, with as little locking as possible.(通常，您不需要做任何特殊的事情来启用在线DDL。默认情况下，MySQL在允许的情况下立即或就地执行操作，并尽可能少地使用锁。)
 
+You can control aspects of a DDL operation using the ALGORITHM and LOCK clauses of the ALTER TABLE statement. These clauses are placed at the end of the statement, separated from the table and column specifications by commas. For example:(可以使用ALTER TABLE语句的ALGORITHM和LOCK子句控制DDL操作的各个方面。这些子句放在语句的末尾，用逗号将它们与表和列规范分开。例如:)
+```sql
+   ALTER TABLE tbl_name ADD PRIMARY KEY (column), ALGORITHM=INPLACE;
+```
+
+The LOCK clause may be used for operations that are performed in place and is useful for fine-tuning the degree of concurrent access to the table during operations. Only LOCK=DEFAULT is supported for operations that are performed instantly. The ALGORITHM clause is primarily intended for performance comparisons and as a fallback to the older table-copying behavior in case you encounter any issues. For example:
+
 
 
