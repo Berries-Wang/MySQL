@@ -39,9 +39,9 @@
             "program": "${workspaceFolder}/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/001.build-output/bin/mysqld",
             "args": [
                 "--defaults-file=${workspaceFolder}/001.SOURCE_CODE/001.mysql-server-8.0.30-GA/build/000.build-scripts/sys/my.cnf",
-                "--user=root",
                 "--debug=d,info:n:N:F:i:L:o"
-            ]
+            ],
+            "preLaunchTask": "MySQL-8.0-Debug-PreTask"
         }
     ]
 }
