@@ -14,6 +14,10 @@
 001.SOURCE_CODE/004.mysql-server-8.0.12/libs/boost_1_67_0
 001.SOURCE_CODE/004.mysql-server-8.0.12/build/000.build-scripts/data
 001.SOURCE_CODE/004.mysql-server-8.0.12/build/000.build-scripts/data/**
+001.SOURCE_CODE/006.mysql-server-8.4.0-LTS/libs/libs-output
+001.SOURCE_CODE/006.mysql-server-8.4.0-LTS/libs/boost_1_77_0
+001.SOURCE_CODE/006.mysql-server-8.4.0-LTS/build/000.build-scripts/data
+001.SOURCE_CODE/006.mysql-server-8.4.0-LTS/build/001.build-output
 # maven ignore
 target/
 *.jar
