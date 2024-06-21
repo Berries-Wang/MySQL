@@ -55,3 +55,8 @@
    -Wshadow-compatible-local：警告当前作用域中的局部变量隐藏了同名的全局变量，前提是这个局部变量的类型和全局变量的类型是兼容的。
    
 ```
+
+### cc: error: unrecognized command-line option ‘-Wconditional-uninitialized’; did you mean ‘-Wno-uninitialized’?
+```txt
+    问题： clang 支持该参数，但是gcc不支持该参数
+```
