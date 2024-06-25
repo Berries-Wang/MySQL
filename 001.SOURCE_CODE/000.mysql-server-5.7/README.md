@@ -185,7 +185,7 @@ Ubuntu 20.04
    mysql> create user 'root'@'%' identified by '123456';
    Query OK, 0 rows affected (0.01 sec)
    
-   mysql> grant all privileges on *.* to 'root'@'%' with grant option;
+   mysql> 
    Query OK, 0 rows affected (0.01 sec)
    
    mysql> 

@@ -53,6 +53,16 @@
                 "--debug=d,info:n:N:F:i:L:o"
             ],
             "preLaunchTask": "MySQL-8.0-Debug-PreTask"
+        },{
+            "name": "mysqld-8.4.0-LTS-debug",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/001.SOURCE_CODE/006.mysql-server-8.4.0-LTS/build/001.build-output/bin/mysqld",
+            "args": [
+                "--defaults-file=${workspaceFolder}/001.SOURCE_CODE/006.mysql-server-8.4.0-LTS/build/000.build-scripts/sys/my.cnf",
+                "--debug=d,info:n:N:F:i:L:o"
+            ],
+            "preLaunchTask": "mysqld-8.4.0-LTS-PreTask"
         }
     ]
 }

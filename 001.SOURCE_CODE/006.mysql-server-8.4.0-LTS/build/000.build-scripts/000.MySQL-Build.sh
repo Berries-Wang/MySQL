@@ -22,7 +22,6 @@ echo '当前目录:' `pwd`
 #run cmake to configure the build:
 cmake  \
      -DCMAKE_BUILD_TYPE=Debug `# Debug Configuration`\
-     -DWITH_BOOST=${CONFDIR}/../../libs/boost_1_77_0 \
      ../../mysql-server-8.4.0-LTS
 
 # 编译

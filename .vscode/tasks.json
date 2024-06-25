@@ -31,6 +31,16 @@
                 "reveal": "always",
                 "panel": "new"
             }
+        },
+        {
+            "label": "mysqld-8.4.0-LTS-PreTask",
+            "type": "shell",
+            "command": "${workspaceFolder}/001.SOURCE_CODE/006.mysql-server-8.4.0-LTS/build/000.build-scripts/002.MySQL-8.4-Debug-PreTask.sh",
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
         }
     ]
 }
