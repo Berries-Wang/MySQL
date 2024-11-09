@@ -24,7 +24,7 @@ echo '当前目录:' `pwd`
 # 全局搜索: WITH_BOOST(要解压后的) , 即可以不安装boost库，直接指定源码来编译MySQL
 cmake  \
      -DCMAKE_BUILD_TYPE=Debug `# Debug Configuration`\
-     -DWITH_BOOST=${CONFDIR}/../../libs/libs-output/boost_1_59_0 \
+     -DWITH_BOOST=${CONFDIR}/../../libs/libs-output/boost_1_59_0.tar.gz \
      -DWITH_VALGRIND=1  ../../mysql-server-5.7
 
 # 编译
