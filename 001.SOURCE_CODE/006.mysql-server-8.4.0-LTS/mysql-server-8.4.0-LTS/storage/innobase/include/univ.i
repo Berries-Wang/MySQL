@@ -310,7 +310,7 @@ constexpr uint32_t UNIV_ZIP_SIZE_SHIFT_MAX = 14;
 constexpr uint32_t UNIV_PAGE_SIZE_SHIFT_MIN = 12;
 /** Maximum Page Size Shift (power of 2) */
 constexpr uint32_t UNIV_PAGE_SIZE_SHIFT_MAX = 16;
-/** Default Page Size Shift (power of 2) */
+/** Default Page Size Shift (power of 2) 默认页大小位移（2 的幂）*/
 constexpr uint32_t UNIV_PAGE_SIZE_SHIFT_DEF = 14;
 /** Original 16k InnoDB Page Size Shift, in case the default changes */
 constexpr uint32_t UNIV_PAGE_SIZE_SHIFT_ORIG = 14;

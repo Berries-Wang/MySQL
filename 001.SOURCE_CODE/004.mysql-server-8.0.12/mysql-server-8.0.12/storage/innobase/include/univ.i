@@ -314,7 +314,7 @@ limit both with this same constant. */
 #define UNIV_PAGE_SIZE_SHIFT_MIN 12
 /** Maximum Page Size Shift (power of 2) */
 #define UNIV_PAGE_SIZE_SHIFT_MAX 16
-/** Default Page Size Shift (power of 2) */
+/** Default Page Size Shift (power of 2) 默认页大小位移（2 的幂）*/
 #define UNIV_PAGE_SIZE_SHIFT_DEF 14
 /** Original 16k InnoDB Page Size Shift, in case the default changes */
 #define UNIV_PAGE_SIZE_SHIFT_ORIG 14
