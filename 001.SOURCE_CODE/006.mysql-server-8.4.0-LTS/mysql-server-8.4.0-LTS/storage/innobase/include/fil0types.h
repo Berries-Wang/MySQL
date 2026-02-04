@@ -42,6 +42,10 @@ this program; if not, write to the Free Software Foundation, Inc.,
 versions the 'new' checksum of the page */
 constexpr uint32_t FIL_PAGE_SPACE_OR_CHKSUM = 0;
 
+/**
+ * constexpr: constant expression"（常量表达式）
+ * constexpr 告诉编译器：“这个值在编译期间就能完全确定下来，请把它当成一个编译时常量来对待。”
+ */
 /** page offset inside space */
 constexpr uint32_t FIL_PAGE_OFFSET = 4;
 
