@@ -5,5 +5,6 @@
         "string_view": "cpp"
     },
     "cmake.configureOnOpen": true,
-    "cmake.cacheInit": null
+    "cmake.cacheInit": null,
+    "cmake.sourceDirectory": "/Volumes/BERRIES_SPACE/OPEN_SOURCE/Berries-MySQL/001.SOURCE_CODE/000.mysql-server-5.7/mysql-server-5.7/include"
 }
