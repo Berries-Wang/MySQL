@@ -316,7 +316,7 @@ static bool page_cur_has_null(const rec_t *rec, const dict_index_t *index) {
   return (*nulls & null_mask);
 }
 
-/** Searches the right position for a page cursor.
+/** Searches the right position for a page cursor.(在页内搜索游标的正确位置)
 @param[in] block Buffer block
 @param[in] index Record descriptor
 @param[in] tuple Data tuple
