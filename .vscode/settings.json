@@ -1,10 +1,15 @@
 {
-    "files.associations": {
-        "array": "cpp",
-        "string": "cpp",
-        "string_view": "cpp"
-    },
-    "cmake.configureOnOpen": true,
-    "cmake.cacheInit": null,
-    "cmake.sourceDirectory": "/Volumes/BERRIES_SPACE/OPEN_SOURCE/Berries-MySQL/001.SOURCE_CODE/000.mysql-server-5.7/mysql-server-5.7/include"
+  "clang-format.executable": "clang-format", // 应该是会根据宿主机OS,从而选择 target.osx 或 target.linux的值
+  // 针对 macOS 系统的配置
+  "target.osx": {
+    "clang-format.executable": "/opt/homebrew/bin/clang-format"
+  },
+  // 针对 Linux 系统的配置
+  "target.linux": {
+    "clang-format.executable": "/usr/bin/clang-format"
+  },
+  "files.associations": {
+    "*.h": "c",
+    "*.c": "c"
+  }
 }
