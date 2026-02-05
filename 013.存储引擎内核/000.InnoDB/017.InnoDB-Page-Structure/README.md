@@ -6,8 +6,11 @@
 ## 尝试从源码分析InnoDB数据页结构
 |类型|源码|备注|
 |-|-|-|
-|查找过程 (Search)|- page_cur_search_with_match:[001.SOURCE_CODE/006.mysql-server-8.4.0-LTS/mysql-server-8.4.0-LTS/storage/innobase/page/page0cur.cc]|-|
+|查找过程 (Search)|- page_cur_search_with_match:[mysql-server-8.4.0-LTS/storage/innobase/page/page0cur.cc]|-|
 |-|-|-|
+|File Header定义|- [mysql-server-8.4.0-LTS/storage/innobase/include/fil0types.h]|- 借助 [MySQL Technical Insider-InnoDB Engine#4.4　InnoDB数据页结构](../../../007.参考资料/MySQL%20Technical%20Insider-InnoDB%20Engine.epub) 理解|
+|-|-|-|
+|Page Header定义|- [mysql-server-8.4.0-LTS/storage/innobase/include/page0types.h]|- 借助 [MySQL Technical Insider-InnoDB Engine#4.4　InnoDB数据页结构](../../../007.参考资料/MySQL%20Technical%20Insider-InnoDB%20Engine.epub) 理解|
 
 
 ## 参考资料

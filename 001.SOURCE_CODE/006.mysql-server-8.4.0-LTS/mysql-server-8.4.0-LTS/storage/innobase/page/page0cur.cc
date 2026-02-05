@@ -329,9 +329,7 @@ void page_cur_search_with_match(const buf_block_t *block,
                                 const dict_index_t *index,
                                 const dtuple_t *tuple, page_cur_mode_t mode,
                                 ulint *iup_matched_fields,
-
                                 ulint *ilow_matched_fields,
-
                                 page_cur_t *cursor, rtr_info_t *rtr_info) {
   ulint up;
   ulint low;

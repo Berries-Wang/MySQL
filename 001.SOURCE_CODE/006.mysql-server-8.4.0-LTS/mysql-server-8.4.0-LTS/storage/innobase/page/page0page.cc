@@ -302,10 +302,12 @@ static const byte infimum_supremum_compact[] = {
     0x00 /* end of record list */, 's', 'u', 'p', 'r', 'e', 'm', 'u', 'm'};
 
 /** The index page creation function.
-@param[in,out]  block           a buffer block where the page is created
-@param[in]      comp            nonzero=compact page format
-@param[in]      page_type       page type
-@return pointer to the page */
+ * (将一块空白的（或陈旧的）内存内存块（Frame），按照 InnoDB
+ * 规范“格式化”为一个崭新的、可用的数据页)
+ * @param[in,out]  block           a buffer block where the page is created
+ * @param[in]      comp            nonzero=compact page format
+ * @param[in]      page_type       page type
+ * @return pointer to the page */
 page_t *page_create_low(buf_block_t *block, ulint comp, page_type_t page_type) {
   page_t *page;
 

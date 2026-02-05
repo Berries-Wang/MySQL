@@ -154,9 +154,11 @@ constexpr uint32_t REC_INFO_INSTANT_FLAG = 0x80UL;
 /* Number of extra bytes in an old-style record,
 in addition to the data and the offsets */
 constexpr uint32_t REC_N_OLD_EXTRA_BYTES = 6;
-/* Number of extra bytes in a new-style record,
-in addition to the data and the offsets */
+
+/* Number of extra bytes in a new-style record, in addition to the data and the
+ * offsets */
 constexpr int32_t REC_N_NEW_EXTRA_BYTES = 5;
+
 /* Number of extra bytes in a new-style temporary record,
 in addition to the data and the offsets.
 This is used only after instant ADD COLUMN. */

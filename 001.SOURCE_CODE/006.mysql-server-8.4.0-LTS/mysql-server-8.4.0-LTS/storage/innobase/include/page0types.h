@@ -42,10 +42,12 @@ this program; if not, write to the Free Software Foundation, Inc.,
 
 #include <map>
 
-/*                      PAGE HEADER
-                        ===========
-
-Index page header starts at the first offset left free by the FIL-module */
+/*                         PAGE HEADER
+ *                         ===========
+ *
+ * Index page header starts at the first offset left free by the FIL-module
+ * (索引页头（Index Page Header）起始于 FIL 模块所预留出的第一个空闲偏移量位置)
+ */
 
 typedef byte page_header_t;
 
@@ -53,49 +55,92 @@ typedef byte page_header_t;
 constexpr uint32_t PAGE_HEADER = FSEG_PAGE_DATA;
 
 /*-----------------------------*/
-/** number of slots in page directory */
+/**
+ * number of slots in page directory 
+ * -> 如何理解slot?
+ * Slot（槽） 是 Page Directory（页目录） 的基本单元
+ * 
+ * | 特性 | 非叶子节点 (Level > 0) | 叶子节点 (Level = 0) |
+ * | --- | --- | --- |
+ * | 存储内容  | 索引键 + 子页号(Page Number) | 索引键 + 完整数据 (或主键) |
+ * | 记录类型  | `REC_TYPE_NODE_PTR` (1)    | `REC_TYPE_ORDINARY` (0) |
+ * | 查找作用  | 缩小范围，提供路径            | 提供最终结果              |
+ * | Slot作用 | 快速定位目录项                | 快速定位数据行            |
+ * 
+*/
 constexpr uint32_t PAGE_N_DIR_SLOTS = 0;
+
 /** pointer to record heap top */
 constexpr uint32_t PAGE_HEAP_TOP = 2;
+
 /** number of records in the heap, bit 15=flag: new-style compact page format */
 constexpr uint32_t PAGE_N_HEAP = 4;
-/** pointer to start of page free record list */
+
+/**
+ *  pointer to start of page free record list 
+ *  (指向页面空闲记录链表（Free Record List）起始位置的指针)
+ * */
 constexpr uint32_t PAGE_FREE = 6;
-/** number of bytes in deleted records */
+
+/** number of bytes in deleted records (PAGE_GARBAGE 是 Page Header（页面头部）
+ * 中的一个字段，偏移量为
+ * 8。它记录了当前页面内所有被标记为已删除（deleted）记录所占用的总字节数) */
 constexpr uint32_t PAGE_GARBAGE = 8;
+
+/**
+ * PAGE_GARBAGE 对应的变量只有2个字节用来存储数据,完全足够了,
+ * 因为一个页才16K
+ */
+
 /** pointer to the last inserted record, or NULL if this info has been reset by
- a delete, for example */
+ * a delete, for example */
 constexpr uint32_t PAGE_LAST_INSERT = 10;
+
 /** last insert direction: PAGE_LEFT, ... */
 constexpr uint32_t PAGE_DIRECTION = 12;
-/** number of consecutive inserts to the same direction */
+
+/** number of consecutive(连续的) inserts to the same direction */
 constexpr uint32_t PAGE_N_DIRECTION = 14;
+
 /** number of user records on the page */
 constexpr uint32_t PAGE_N_RECS = 16;
+
 /** highest id of a trx which may have modified a record on the page; trx_id_t;
-defined only in secondary indexes and in the insert buffer tree */
+ * defined only in secondary indexes and in the insert buffer tree
+ * (曾可能修改过该页内记录的最大事务 ID（Trx ID）；类型为
+ * trx_id_t；该字段仅在二级索引（Secondary Indexes）和插入缓冲树（Insert Buffer
+ * Tree）中定义)
+ */
 constexpr uint32_t PAGE_MAX_TRX_ID = 18;
+
 /** end of private data structure of the page header which are set in a page
-create */
+ * create (页头私有数据结构的终点；这些字段在页面创建时设定) */
 constexpr uint32_t PAGE_HEADER_PRIV_END = 26;
 /*----*/
-/** level of the node in an index tree; the leaf level is the level 0.
-This field should not be written to after page creation. */
+
+/** level of the node in an index tree; the leaf level is the level 0. This
+ * field should not be written to after page creation. */
 constexpr uint32_t PAGE_LEVEL = 26;
+
 /** index id where the page belongs. This field should not be written to after
- page creation. */
+ * page creation. */
 constexpr uint32_t PAGE_INDEX_ID = 28;
+
 /** file segment header for the leaf pages in a B-tree: defined only on the root
  page of a B-tree, but not in the root of an ibuf tree */
 constexpr uint32_t PAGE_BTR_SEG_LEAF = 36;
 constexpr uint32_t PAGE_BTR_IBUF_FREE_LIST = PAGE_BTR_SEG_LEAF;
 constexpr uint32_t PAGE_BTR_IBUF_FREE_LIST_NODE = PAGE_BTR_SEG_LEAF;
-/* in the place of PAGE_BTR_SEG_LEAF and _TOP
-there is a free list base node if the page is
-the root page of an ibuf tree, and at the same
-place is the free list node if the page is in
-a free list */
+
+/* in the place of PAGE_BTR_SEG_LEAF and _TOP there is a free list base node if
+ * the page is the root page of an ibuf tree, and at the same place is the free
+ * list node if the page is in a free list  在 PAGE_BTR_SEG_LEAF 和
+ * PAGE_BTR_SEG_TOP 的位置上：如果该页是
+ * Ibuf（插入缓冲）树的根页，则存放的是空闲列表基节点（Free List Base
+ * Node）；如果该页位于空闲列表中，则在相同位置存放的是空闲列表节点（Free List
+ * Node）*/
 constexpr uint32_t PAGE_BTR_SEG_TOP = 36 + FSEG_HEADER_SIZE;
+
 /* file segment header for the non-leaf pages
 in a B-tree: defined only on the root page of
 a B-tree, but not in the root of an ibuf
@@ -104,16 +149,18 @@ tree */
 /** start of data on the page */
 constexpr uint32_t PAGE_DATA = PAGE_HEADER + 36 + 2 * FSEG_HEADER_SIZE;
 
-/** offset of the page infimum record on an
-old-style page */
+/** offset of the page infimum record on an old-style page */
 #define PAGE_OLD_INFIMUM (PAGE_DATA + 1 + REC_N_OLD_EXTRA_BYTES)
 
-/** offset of the page supremum record on an
-old-style page */
+/** offset of the page supremum record on an old-style page */
 #define PAGE_OLD_SUPREMUM (PAGE_DATA + 2 + 2 * REC_N_OLD_EXTRA_BYTES + 8)
 
 /** offset of the page supremum record end on an old-style page */
 #define PAGE_OLD_SUPREMUM_END (PAGE_OLD_SUPREMUM + 9)
+
+/**
+ * INFIMUM SUPERMUM 都占13个字节
+ */
 
 /** offset of the page infimum record on a new-style compact page */
 #define PAGE_NEW_INFIMUM (PAGE_DATA + REC_N_NEW_EXTRA_BYTES)
