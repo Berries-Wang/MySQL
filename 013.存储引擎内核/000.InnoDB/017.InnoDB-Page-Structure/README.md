@@ -1,5 +1,5 @@
 # InnoDB-Page-Structure
-> 阅读:[MySQL Technical Insider-InnoDB Engine#4.4　InnoDB数据页结构](../../../007.参考资料/MySQL%20Technical%20Insider-InnoDB%20Engine.epub)
+> 阅读: <br/>[MySQL Technical Insider-InnoDB Engine#4.4　InnoDB数据页结构](../../../007.参考资料/MySQL%20Technical%20Insider-InnoDB%20Engine.epub) <br/> [Berries-Kernel/001.UNIX-DOCS/033.文件系统]
 
 
 
@@ -14,7 +14,10 @@
 
 
 ## B+树结构
-- ![wechat_2026-02-05_220122_037.png](../pics/wechat_2026-02-05_220122_037.png)
+- ![wechat_2026-02-05_220122_037.jpg](../pics/wechat_2026-02-05_220122_037.jpg)
+
+### Innodb 中的B+Tree
+- ![20260206114357.jpg](../pics/20260206114357.jpg)
 
 ## 参考资料
 - https://blog.jcole.us/2013/01/10/btree-index-structures-in-innodb/

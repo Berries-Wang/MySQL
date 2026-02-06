@@ -60,7 +60,8 @@ constexpr uint32_t FIL_PAGE_SPACE_OR_CHKSUM = 0;
  * 个页,FIL_PAGE_OFFSET就表示
  * 当前页在所有页当中的位置，若表空间的ID是10，搜索(10,1)就表示查找a中的第2个页
  * 
- * 就是page numver
+ * 就是Page Number -- 通过page number可以去找到对应的页
+ * > 参考: [013.存储引擎内核/000.InnoDB/017.InnoDB-Page-Structure/README.md]
  */
 constexpr uint32_t FIL_PAGE_OFFSET = 4;
 

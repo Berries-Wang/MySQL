@@ -58,7 +58,7 @@ constexpr uint32_t PAGE_HEADER = FSEG_PAGE_DATA;
 /**
  * number of slots in page directory 
  * -> 如何理解slot?
- * Slot（槽） 是 Page Directory（页目录） 的基本单元
+ * Slot（槽） 是 Page Directory（页目录） 的基本单元 * 【重要!!!】
  * 
  * | 特性 | 非叶子节点 (Level > 0) | 叶子节点 (Level = 0) |
  * | --- | --- | --- |
@@ -72,7 +72,13 @@ constexpr uint32_t PAGE_HEADER = FSEG_PAGE_DATA;
 */
 constexpr uint32_t PAGE_N_DIR_SLOTS = 0;
 
-/** pointer to record heap top */
+/**
+ *  pointer to record heap top 
+ *  (指向记录堆顶（Record Heap Top）的指针)
+ * > 记录了页面内已分配空间与未分配空间的分界点
+ * 
+ * 结合:[图　4-6　InnoDB存储引擎数据页结构] 理解
+ * */
 constexpr uint32_t PAGE_HEAP_TOP = 2;
 
 /** number of records in the heap, bit 15=flag: new-style compact page format */
@@ -98,7 +104,14 @@ constexpr uint32_t PAGE_GARBAGE = 8;
  * a delete, for example */
 constexpr uint32_t PAGE_LAST_INSERT = 10;
 
-/** last insert direction: PAGE_LEFT, ... */
+/**
+ * 叶子节点和非叶子节点存储格式是一样的: 都有 page directory  + user records:
+ * user records 在叶子节点和非叶子节点的区别: 
+ *   - 叶子节点: 主键 + 数据
+ *   - 非叶子节点: 主键 + page number 
+ * 
+ * last insert direction: PAGE_LEFT, ...
+ *  */
 constexpr uint32_t PAGE_DIRECTION = 12;
 
 /** number of consecutive(连续的) inserts to the same direction */
