@@ -11,6 +11,22 @@
 
 &nbsp;&nbsp;redo log*基本*是顺序写的，在数据库运行时不需要对redo log的文件进行读取操作。而undo log 是需要进行随机读取的。
 
+---
+## 文档导航
+**概念篇**：[000.redo.log](./000.redo.log.md) · [001.undo.log](./001.undo.log.md) · [002.InnoDB缓冲池](./002.InnoDB缓冲池.md) · [003.Double-Write](./003.Double-Write.md) · [004.purge](./004.purge.md) · [005.group-commit](./005.group-commit.md) · [006.Change-Buffer](./006.Change-Buffer.md)
+
+**源码篇（基于 8.0.30 源码，ASCII 流程图 + 函数/行号标注）**：
+| 知识点 | 文档 |
+|---|---|
+| WAL 为什么快 & 三条铁律的代码实现 | [007.预写日志WAL如何提升数据库性能原理](./007.预写日志WAL如何提升数据库性能原理.md) |
+| redo log 运行时链路（mtr→buffer→writer/flusher→checkpoint→恢复） | [008.redo.log源码篇](./008.redo.log源码篇(基于8.0.30源码).md) |
+| undo log 生命周期（分配→写镜像→提交/回滚→清理） | [009.undo.log源码篇](./009.undo.log源码篇(基于8.0.30源码).md) |
+| Change Buffer（写时缓存/读时合并） | [010.Change-Buffer源码篇](./010.Change-Buffer源码篇(基于8.0.30源码).md) |
+| Double Write（partial write 防护） | [011.Double-Write源码篇](./011.Double-Write源码篇(基于8.0.30源码).md) |
+
+> MVCC 读路径（ReadView/版本回溯）见 [003.MySQL事务/007.InnoDB之MVCC实现原理(基于8.0.30源码)](../007.InnoDB之MVCC实现原理(基于8.0.30源码).md)
+
+
 ### 日志写入
 &nbsp;&nbsp;为了确保每次日志都写入重做日志文件，在每次将重做日志缓冲写入重做日志文件时，InnoDB存储引擎都需要调用一次fsync操作。如下图：
   - <img src="./pics/log-write-to-file-001.png"/>
