@@ -77,6 +77,7 @@
 | [07.成本模型源码解析](./07.成本模型源码解析.md) | `Cost_model_server` 接口；成本常量默认值与 mysql.server_cost/engine_cost 表；handler 层成本上报；FLUSH OPTIMIZER_COSTS | opt_costconstants.cc / opt_costmodel.cc / handler.h |
 | [08.Hypergraph新优化器与迭代器执行器](./08.Hypergraph新优化器与迭代器执行器.md) | join_optimizer/ 目录与 DPhyp 算法；图简化；Iterator 执行器类体系与执行循环 | sql/join_optimizer/ / sql/iterators/ |
 | [09.优化器如何决定用哪个索引](./09.优化器如何决定用哪个索引.md) | **综合篇**：索引选择的五级漏斗（候选集→range初估→连接比价→排序偏好→计划修正）；possible_keys 的位图来源；FORCE INDEX 三个生效点；排障速查表 | table.cc / sql_planner.cc / range_optimizer/ |
+| [10.实战案例-IN列表超过200导致主键计划翻转](./10.实战案例-IN列表超过200导致主键计划翻转.md) | **实战篇（脱敏）**：`eq_range_index_dive_limit` 边界实验定位法；大 IN 导致主键计划翻转到二级索引倒序全扫；FORCE INDEX(PRIMARY) 修复与可证性论证 | sys_vars.cc:3877 / index_range_scan_plan.cc / sql_planner.cc |
 
 ---
 
